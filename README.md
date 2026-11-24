@@ -52,6 +52,13 @@
 
 `build.sh` 里写死了本机的 JDK 和 Gradle 路径，换机器需要改这两行，或者直接用 Gradle：`gradle build`。
 
+发布新版本用 `release.sh`，一条命令走完改版本号、构建、部署、生成 changelog、提交：
+
+```sh
+./release.sh 1.6.0 "新增草的合成升级"
+./release.sh 1.6.1 "修了口袋排序" --dry-run   # 先看会做什么
+```
+
 ## 已知问题
 
 - 旧存档里已经生成过的区块不会补草（箱子内容在区块生成时就算好了）
