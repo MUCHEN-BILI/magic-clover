@@ -18,7 +18,7 @@
 
 ## 安装
 
-- Minecraft **1.21.11**
+- Minecraft **1.21.10 ~ 1.21.11**（同一个 jar 通用）
 - Fabric Loader **0.20.1+**
 - [Fabric API](https://modrinth.com/mod/fabric-api)（必需）
 - Java 21

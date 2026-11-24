@@ -183,7 +183,8 @@ fi
 # 6. 文档提醒
 step "6/6 文档同步提醒"
 if [[ "$BUMP" == "补丁版本" ]]; then
-	echo "   补丁版本：只写 changelog 即可，介绍文和描述不用动。"
+	echo "   补丁版本：通常只写 changelog 即可。"
+	echo "   例外：改了兼容范围 / 配置项 / 掉落概率的话，介绍文和描述也要跟着改。"
 else
 	echo "   这次是${BUMP}，建议同步这几处："
 	echo "     · 幸运四叶草模组介绍.html（版本号、概率、物品清单）→ 改完跑 python sync_intro.py"
