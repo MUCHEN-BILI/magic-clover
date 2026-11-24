@@ -371,14 +371,25 @@ public final class EventSystem {
 	// ===== 参与型事件 =====
 
 	/**
+	 * 参与型事件的掉落物统一投放：加发光轮廓（穿墙可见）+ 头顶光柱，
+	 * 解决「提示让捡东西，但根本不知道东西在哪」的问题。
+	 */
+	private static void dropMarked(ServerLevel level, double x, double y, double z, ItemStack stack, int pickUpDelay) {
+		ItemEntity item = Fx.dropItem(level, x, y, z, stack, pickUpDelay);
+		if (ModConfig.get().eventItemMarker) {
+			EventMarkers.mark(item, 20);
+		}
+	}
+
+	/**
 	 * 寻宝竞速：把好东西撒在玩家周围更大的一圈，得跑过去捡才拿得到。
-	 * 大字会提示「快去捡」，配合更高的落点，制造一场小小的寻宝。
+	 * 每份奖励都带白色发光轮廓和竖直光柱，隔着树和坡也能看到方位。
 	 */
 	private static void treasureRush(ServerLevel level, Player player) {
 		Fx.burst(level, player, ParticleTypes.HAPPY_VILLAGER, 40);
-		Msg.send(player, Component.literal("§6[幸运事件] §f宝藏散落在四周！§e快跑过去捡！"));
+		Msg.send(player, Component.literal("§6[幸运事件] §f宝藏散落在四周！§e白框 + 光柱 §f就是它们，快跑过去捡！"));
 		if (ModConfig.get().eventTitle) {
-			showTitle(player, "§a§l寻宝竞速", "§e宝藏散落在四周 · 快去捡！");
+			showTitle(player, "§a§l寻宝竞速", "§e寻找发光的宝藏 · 6 处");
 		}
 
 		ItemStack[] loot = {
@@ -394,7 +405,7 @@ public final class EventSystem {
 			double dist = 8 + Math.random() * 10;
 			double x = player.getX() + Math.cos(angle) * dist;
 			double z = player.getZ() + Math.sin(angle) * dist;
-			Fx.dropItem(level, x, player.getY() + 14 + Math.random() * 6, z, stack, 5);
+			dropMarked(level, x, player.getY() + 14 + Math.random() * 6, z, stack, 5);
 			Fx.at(level, x, player.getY() + 0.5, z, ParticleTypes.END_ROD, 12, 0.6);
 		}
 	}
@@ -406,9 +417,9 @@ public final class EventSystem {
 	private static void fateChoice(ServerLevel level, Player player) {
 		Fx.burst(level, player, ParticleTypes.ENCHANT, 40);
 		if (ModConfig.get().eventTitle) {
-			showTitle(player, "§d§l命运抉择", "§e两个包裹 · 只能选一个");
+			showTitle(player, "§d§l命运抉择", "§e两个发光包裹 · 只能选一个");
 		}
-		Msg.send(player, Component.literal("§6[幸运事件] §f两个包裹落下了！§c绿色=稳妥 §d紫色=赌博§f，选一个捡！"));
+		Msg.send(player, Component.literal("§6[幸运事件] §f前方两个 §e发光包裹§f：§a绿名=稳妥 §d紫名=赌博§f，走过去选一个捡！"));
 
 		// 稳妥袋：稳定的中上奖励
 		ItemStack safe = new ItemStack(Items.DIAMOND, 6);
@@ -426,8 +437,8 @@ public final class EventSystem {
 		double a = Math.random() * Math.PI * 2.0;
 		double dx = Math.cos(a) * 4;
 		double dz = Math.sin(a) * 4;
-		Fx.dropItem(level, player.getX() + dx, player.getY() + 12, player.getZ() + dz, safe, 5);
-		Fx.dropItem(level, player.getX() - dx, player.getY() + 12, player.getZ() - dz, gamble, 5);
+		dropMarked(level, player.getX() + dx, player.getY() + 12, player.getZ() + dz, safe, 5);
+		dropMarked(level, player.getX() - dx, player.getY() + 12, player.getZ() - dz, gamble, 5);
 		Fx.at(level, player.getX() + dx, player.getY() + 0.5, player.getZ() + dz, ParticleTypes.HAPPY_VILLAGER, 20, 0.8);
 		Fx.at(level, player.getX() - dx, player.getY() + 0.5, player.getZ() - dz, ParticleTypes.ENCHANT, 20, 0.8);
 	}

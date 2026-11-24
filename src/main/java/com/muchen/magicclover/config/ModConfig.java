@@ -49,6 +49,11 @@ public class ModConfig {
 	public java.util.List<String> modItemBlacklist = new java.util.ArrayList<>();
 	/** 特殊事件触发时是否在屏幕中央显示大字 */
 	public boolean eventTitle = true;
+	/**
+	 * 参与型事件（寻宝竞速 / 命运抉择）的目标物是否加指引：
+	 * 原版「发光」白色轮廓（穿墙可见）+ 头顶竖直光柱。关掉后奖励就是普通掉落物。
+	 */
+	public boolean eventItemMarker = true;
 
 	public static ModConfig get() {
 		if (instance == null) load();

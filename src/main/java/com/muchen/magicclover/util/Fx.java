@@ -128,12 +128,13 @@ public final class Fx {
 		shockwave(level, x, y - 0.9, z, ParticleTypes.HAPPY_VILLAGER, 36, 2.0);
 	}
 
-	/** 天降物品统一生成：更高、带轻微旋转、落地前拖尾粒子。 */
-	public static void dropItem(ServerLevel level, double x, double y, double z, ItemStack stack, int pickUpDelay) {
+	/** 天降物品统一生成：更高、带轻微旋转、落地前拖尾粒子。返回生成的掉落物，便于后续加标记。 */
+	public static ItemEntity dropItem(ServerLevel level, double x, double y, double z, ItemStack stack, int pickUpDelay) {
 		ItemEntity entity = new ItemEntity(level, x, y, z, stack);
 		entity.setDeltaMovement((Math.random() - 0.5) * 0.12, -0.04, (Math.random() - 0.5) * 0.12);
 		entity.setPickUpDelay(pickUpDelay);
 		level.addFreshEntity(entity);
 		level.sendParticles(ParticleTypes.END_ROD, x, y, z, 3, 0.15, 0.2, 0.15, 0.01);
+		return entity;
 	}
 }

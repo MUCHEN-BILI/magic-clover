@@ -2,6 +2,7 @@ package com.muchen.magicclover;
 
 import com.muchen.magicclover.command.PouchCommand;
 import com.muchen.magicclover.config.ModConfig;
+import com.muchen.magicclover.event.EventMarkers;
 import com.muchen.magicclover.event.LootModifiers;
 import com.muchen.magicclover.event.MiningDrops;
 import com.muchen.magicclover.event.PlacedBlocks;
@@ -63,6 +64,9 @@ public class MagicCloverMod implements ModInitializer {
 
 		// 原版结构箱子奖励
 		StructureLoot.register();
+
+		// 参与型事件掉落物的发光指引（轮廓 + 光柱）
+		EventMarkers.register();
 
 		LOGGER.info("Magic Clover Reborn initialized successfully!");
 	}
