@@ -161,10 +161,22 @@ elif [[ $DRY -eq 1 ]]; then
 else
 	git add -A
 	git commit -q -m "release: v${VERSION}${NOTE:+ - $NOTE}" || echo "   没有需要提交的改动"
-	if git push origin main 2>/dev/null; then
+	# GitHub 在本机走代理时偶尔 502 / 连接被掐断，重试三次再放弃
+	pushed=0
+	for attempt in 1 2 3; do
+		if push_out=$(git push origin main 2>&1); then
+			echo "$push_out" | tail -2
+			pushed=1
+			break
+		fi
+		echo "$push_out" | tail -1
+		echo "   ⚠ 第 ${attempt} 次推送失败，5 秒后重试…"
+		sleep 5
+	done
+	if [[ $pushed -eq 1 ]]; then
 		echo "   已推送到 GitHub"
 	else
-		echo "   ⚠ 推送失败（网络问题居多），稍后手动 git push origin main"
+		echo "   ⚠ 三次推送都失败，稍后手动 git push origin main"
 	fi
 fi
 
