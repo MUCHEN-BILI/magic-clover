@@ -1,0 +1,8 @@
+// Loom 镜像配置：libraries.minecraft.net 在本机网络下不可达（TLS 握手被中断）。
+// 这里把 Loom 的 Minecraft 库地址指向项目内的本地 Maven 仓库（由 Gradle 缓存导出），
+// 保证完全离线可编译。
+allprojects {
+	ext.loom_libraries_base = new File(rootDir, 'local-maven').toURI().toString() + '/'
+	ext.loom_resources_base = 'https://bmclapi2.bangbang93.com/assets/'
+	ext.loom_version_manifests = 'https://bmclapi2.bangbang93.com/mc/game/version_manifest_v2.json'
+}

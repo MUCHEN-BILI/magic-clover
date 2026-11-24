@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": "minecraft:netherite_scrap",
+    "C": "magicclover:basic_clover"
+  },
+  "pattern": [
+    "MMM",
+    "MCM",
+    "MMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "magicclover:netherite_clover"
+  }
+}

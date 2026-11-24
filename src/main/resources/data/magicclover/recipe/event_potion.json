@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:blaze_powder",
+    "G": "minecraft:gold_nugget",
+    "C": "magicclover:basic_clover"
+  },
+  "pattern": [
+    "BGB",
+    "GCG",
+    "BGB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "magicclover:event_potion"
+  }
+}

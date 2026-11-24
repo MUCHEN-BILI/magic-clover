@@ -1,0 +1,19 @@
+{
+  "item.magicclover.basic_clover": "Basic Clover",
+  "item.magicclover.wood_clover": "Wooden Clover",
+  "item.magicclover.coal_clover": "Coal Clover",
+  "item.magicclover.copper_clover": "Copper Clover",
+  "item.magicclover.lapis_clover": "Lapis Clover",
+  "item.magicclover.iron_clover": "Iron Clover",
+  "item.magicclover.gold_clover": "Golden Clover",
+  "item.magicclover.diamond_clover": "Diamond Clover",
+  "item.magicclover.emerald_clover": "Emerald Clover",
+  "item.magicclover.netherite_clover": "Netherite Clover",
+  "item.magicclover.mod_clover": "Mod Clover",
+  "item.magicclover.mob_clover": "Mob Clover",
+  "item.magicclover.clover_bundle": "Random Clover Bundle",
+  "item.magicclover.event_potion": "Event Potion",
+  "item.magicclover.lesser_event_potion": "Lucky Tonic",
+  "itemGroup.magicclover": "Magic Clover",
+  "key.magicclover.pouch": "Open Lucky Pouch"
+}

@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "magicclover",
+	"version": "${version}",
+	"name": "Magic Clover Reborn",
+	"description": "幸运四叶草高版本重生版 - 分级幸运草、盲盒包裹、定向合成、模组幸运草、生物幸运草与特殊事件",
+	"authors": [
+		"Muchen"
+	],
+	"contact": {},
+	"license": "CC0-1.0",
+	"icon": "assets/magicclover/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.muchen.magicclover.MagicCloverMod"
+		],
+		"client": [
+			"com.muchen.magicclover.client.MagicCloverClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

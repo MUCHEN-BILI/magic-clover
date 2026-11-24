@@ -1,0 +1,19 @@
+{
+  "item.magicclover.basic_clover": "普通幸运草",
+  "item.magicclover.wood_clover": "木头幸运草",
+  "item.magicclover.coal_clover": "煤炭幸运草",
+  "item.magicclover.copper_clover": "铜幸运草",
+  "item.magicclover.lapis_clover": "青金石幸运草",
+  "item.magicclover.iron_clover": "铁幸运草",
+  "item.magicclover.gold_clover": "黄金幸运草",
+  "item.magicclover.diamond_clover": "钻石幸运草",
+  "item.magicclover.emerald_clover": "绿宝石幸运草",
+  "item.magicclover.netherite_clover": "下界合金幸运草",
+  "item.magicclover.mod_clover": "模组幸运草",
+  "item.magicclover.mob_clover": "生物幸运草",
+  "item.magicclover.clover_bundle": "随机幸运草包裹",
+  "item.magicclover.event_potion": "事件药水",
+  "item.magicclover.lesser_event_potion": "幸运药剂",
+  "itemGroup.magicclover": "幸运四叶草",
+  "key.magicclover.pouch": "打开幸运口袋"
+}

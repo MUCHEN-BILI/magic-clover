@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "magicclover:basic_clover",
+    "N": "minecraft:netherite_ingot"
+  },
+  "pattern": [
+    "CCC",
+    "CNC",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "magicclover:mod_clover"
+  }
+}
