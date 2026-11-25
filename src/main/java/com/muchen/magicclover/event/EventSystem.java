@@ -190,7 +190,7 @@ public final class EventSystem {
 
 	/**
 	 * 附魔书雨：真书假书混着掉。
-	 * 真书带 1~3 条随机附魔；假书就是原版那种「没有附魔内容」的空壳。
+	 * 真书带 1 条随机附魔；假书就是原版那种「没有附魔内容」的空壳。
 	 */
 	private static void enchantedBookRain(ServerLevel level, Player player) {
 		Fx.burst(level, player, ParticleTypes.ENCHANT, 50);
@@ -200,7 +200,7 @@ public final class EventSystem {
 		for (int i = 0; i < total; i++) {
 			ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
 			if (Math.random() < 0.6) {
-				applyEnchantments(level, book, 1 + level.getRandom().nextInt(3), true);
+				applyEnchantments(level, book, 1, true);
 				real++;
 			}
 			double angle = Math.random() * Math.PI * 2.0;

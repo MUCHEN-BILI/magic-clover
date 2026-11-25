@@ -2,7 +2,13 @@ package com.muchen.magicclover.util;
 
 import com.muchen.magicclover.MagicCloverMod;
 import com.muchen.magicclover.data.PouchData;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
@@ -102,10 +108,30 @@ public final class LootEngine {
 		return VANILLA_POOLS[Math.min(tier.getLevel(), VANILLA_POOLS.length - 1)];
 	}
 
-	public static ItemStack pickVanilla(CloverTier tier) {
+	public static ItemStack pickVanilla(CloverTier tier, ServerLevel level) {
 		List<Item> pool = VANILLA_POOLS[Math.min(tier.getLevel(), VANILLA_POOLS.length - 1)];
 		Item item = pool.get((int) (Math.random() * pool.size()));
-		return new ItemStack(item);
+		ItemStack stack = new ItemStack(item);
+		// 附魔书不能是空壳：抽一条随机附魔（等级也随机），和原版附魔书一致
+		if (item == Items.ENCHANTED_BOOK && level != null) {
+			enchantBookRandomly(level, stack);
+		}
+		return stack;
+	}
+
+	private static void enchantBookRandomly(ServerLevel level, ItemStack stack) {
+		try {
+			Registry<Enchantment> registry = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+			var picked = registry.getRandom(level.getRandom());
+			if (picked.isEmpty()) return;
+			Holder<Enchantment> holder = picked.get();
+			int max = Math.max(1, holder.value().getMaxLevel());
+			ItemEnchantments.Mutable mutable = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
+			mutable.set(holder, 1 + level.getRandom().nextInt(max));
+			stack.set(DataComponents.STORED_ENCHANTMENTS, mutable.toImmutable());
+		} catch (Throwable ignored) {
+			// 注册表异常时退化为普通附魔书，至少不会崩游戏
+		}
 	}
 
 	/**

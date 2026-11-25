@@ -251,3 +251,10 @@ The idea comes from konwboj's classic mod *Magic Clover* (Forge, 1.6.2 – 1.12.
 基础幸运草新增合成路线：**4 个相同的种子 → 1 棵基础幸运草**（小麦 / 西瓜 / 南瓜 / 甜菜 / 火把花种子均可）。
 
 **English:** Basic clovers can now be crafted from **4 identical seeds** (wheat / melon / pumpkin / beetroot / torchflower).
+
+
+## 1.6.5 补充说明
+
+修复附魔书空壳：从草里开出的附魔书现在带 1 条随机附魔；「天降附魔书」事件的真书也从 1~3 条改为固定 1 条。
+
+**English:** Enchanted books from clovers now always carry one random enchantment. The book-rain event's real books are capped at one enchantment too.

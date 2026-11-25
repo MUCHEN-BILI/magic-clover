@@ -53,7 +53,7 @@ public class CloverItem extends Item {
 		int toPouch = 0;
 		int toGround = 0;
 		for (int i = 0; i < copies; i++) {
-			ItemStack loot = LootEngine.pickVanilla(tier);
+			ItemStack loot = LootEngine.pickVanilla(tier, serverLevel);
 			lootNames.merge(loot.getDisplayName().getString(), 1, Integer::sum);
 			int result = LootEngine.giveOrStore(serverLevel, player, loot);
 			if (result == LootEngine.GAVE_INVENTORY) toInv++;

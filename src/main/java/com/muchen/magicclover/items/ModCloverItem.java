@@ -49,7 +49,7 @@ public class ModCloverItem extends Item {
 		}
 		// 3) 池子空（比如只装了优化类模组）就兜底给原版好东西，避免白开
 		if (loot == null) {
-			loot = LootEngine.pickVanilla(CloverTier.IRON);
+			loot = LootEngine.pickVanilla(CloverTier.IRON, serverLevel);
 		}
 
 		if (loot == null || loot.isEmpty()) {
