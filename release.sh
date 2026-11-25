@@ -66,7 +66,9 @@ fi
 # 判断这次是补丁版还是功能版，决定要不要动文档
 old_major="${OLD_VERSION%%.*}"; rest="${OLD_VERSION#*.}"; old_minor="${rest%%.*}"
 new_major="${VERSION%%.*}"; rest="${VERSION#*.}"; new_minor="${rest%%.*}"
-if [[ "$new_major" != "$old_major" ]]; then
+if [[ "$OLD_VERSION" == "$VERSION" ]]; then
+	BUMP="同版本重新发布"
+elif [[ "$new_major" != "$old_major" ]]; then
 	BUMP="大版本"
 elif [[ "$new_minor" != "$old_minor" ]]; then
 	BUMP="功能版本"
