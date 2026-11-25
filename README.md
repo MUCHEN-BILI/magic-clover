@@ -63,6 +63,18 @@
 ./release.sh 1.6.1 "修了口袋排序" --dry-run   # 先看会做什么
 ```
 
+## 文档
+
+- [`docs/幸运四叶草-模组介绍.html`](docs/幸运四叶草-模组介绍.html) — 给玩家看的单文件介绍页，贴图已内嵌，可以直接发给别人
+- [`docs/modrinth-description.md`](docs/modrinth-description.md) — Modrinth 项目页描述，中英双语
+- `docs/images/` — 项目图标、封面横幅和 Gallery 截图
+
+改完介绍文记得跑一遍校验，它会检查版本号、各项概率、贴图内嵌是否和代码对得上：
+
+```sh
+python sync_intro.py
+```
+
 ## 已知问题
 
 - 旧存档里已经生成过的区块不会补草（箱子内容在区块生成时就算好了）

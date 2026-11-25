@@ -18,12 +18,12 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-ARTICLE = ROOT / "幸运四叶草模组介绍.html"
-GRADLE = ROOT / "magic-clover" / "gradle.properties"
-CONFIG = (ROOT / "magic-clover" / "src" / "main" / "java" / "com" / "muchen"
+PROJECT = Path(__file__).resolve().parent
+ARTICLE = PROJECT / "docs" / "幸运四叶草-模组介绍.html"
+GRADLE = PROJECT / "gradle.properties"
+CONFIG = (PROJECT / "src" / "main" / "java" / "com" / "muchen"
           / "magicclover" / "config" / "ModConfig.java")
-MINING = (ROOT / "magic-clover" / "src" / "main" / "java" / "com" / "muchen"
+MINING = (PROJECT / "src" / "main" / "java" / "com" / "muchen"
           / "magicclover" / "event" / "MiningDrops.java")
 
 
