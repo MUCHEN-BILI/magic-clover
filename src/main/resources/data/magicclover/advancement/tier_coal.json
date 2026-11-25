@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "magicclover:coal_clover"
+    },
+    "title": {
+      "translate": "advancement.magicclover.tier_coal.title"
+    },
+    "description": {
+      "translate": "advancement.magicclover.tier_coal.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "magicclover:root",
+  "criteria": {
+    "got": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "magicclover:coal_clover"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 15
+  }
+}

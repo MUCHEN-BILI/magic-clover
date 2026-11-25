@@ -27,7 +27,41 @@ public final class PouchCommand {
 						.then(Commands.literal("info").executes(PouchCommand::info))
 						.then(Commands.literal("fillinv").executes(PouchCommand::fillInv))
 						.then(Commands.literal("fillpouch").executes(PouchCommand::fillPouch))
-						.then(Commands.literal("overflow").executes(PouchCommand::overflow))));
+						.then(Commands.literal("overflow").executes(PouchCommand::overflow))
+						.then(Commands.literal("event")
+								.then(Commands.argument("id", com.mojang.brigadier.arguments.StringArgumentType.word())
+										.executes(PouchCommand::event)))));
+	}
+
+	/**
+	 * /cloverpouch event <事件id 或序号>  直接触发一次事件，用于测试。
+	 * 例：/cloverpouch event fate_choice  或  /cloverpouch event 17
+	 */
+	private static int event(com.mojang.brigadier.context.CommandContext<CommandSourceStack> ctx)
+			throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+		ServerPlayer player = ctx.getSource().getPlayerOrException();
+		ServerLevel level = (ServerLevel) player.level();
+		String arg = com.mojang.brigadier.arguments.StringArgumentType.getString(ctx, "id");
+
+		java.util.List<String> keys = com.muchen.magicclover.event.EventSystem.getEventKeys();
+		int index = keys.indexOf(arg);
+		if (index < 0) {
+			try {
+				index = Integer.parseInt(arg);
+			} catch (NumberFormatException e) {
+				index = -1;
+			}
+		}
+		if (index < 0 || index >= keys.size()) {
+			final String hint = String.join(", ", keys);
+			ctx.getSource().sendFailure(Component.literal("未知事件。可用：0~" + (keys.size() - 1) + " 或 " + hint));
+			return 0;
+		}
+
+		com.muchen.magicclover.event.EventSystem.trigger(level, player, index);
+		final int shown = index;
+		ctx.getSource().sendSuccess(() -> Component.literal("已触发事件 #" + shown + " (" + keys.get(shown) + ")"), false);
+		return 1;
 	}
 
 	private static int info(com.mojang.brigadier.context.CommandContext<CommandSourceStack> ctx)

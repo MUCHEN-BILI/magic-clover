@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "magicclover:mob_clover"
+    },
+    "title": {
+      "translate": "advancement.magicclover.mob_clover.title"
+    },
+    "description": {
+      "translate": "advancement.magicclover.mob_clover.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "magicclover:root",
+  "criteria": {
+    "got": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "magicclover:mob_clover"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 10
+  }
+}

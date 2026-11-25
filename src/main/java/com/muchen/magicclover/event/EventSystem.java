@@ -41,12 +41,22 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class EventSystem {
 	private EventSystem() {}
 
-	private static final List<String> EVENT_NAMES = List.of(
-			"矿石雨", "经验爆发", "食物雨", "附魔书雨", "幸运祝福",
-			"生物伙伴", "时空跳跃", "烟花秀", "金苹果雨", "钻石雨",
-			"幸运喷泉", "流浪商人", "铁傀儡护卫", "蜂群祝福", "乐音时刻", "附魔装备雨",
-			"寻宝竞速", "命运抉择"
+	/**
+	 * 事件 id 列表（顺序就是触发索引，不要随意调整顺序）。
+	 * 显示名走语言文件 {@code event.magicclover.<id>}，中英各一套。
+	 */
+	private static final List<String> EVENT_KEYS = List.of(
+			"ore_rain", "xp_burst", "food_rain", "book_rain", "luck_blessing",
+			"mob_companions", "time_jump", "fireworks", "golden_apple_rain", "diamond_rain",
+			"luck_fountain", "wandering_trader", "iron_golem_guard", "bee_blessing",
+			"music_moment", "enchanted_gear_rain", "treasure_rush", "fate_choice"
 	);
+
+	/** 事件显示名（跟随客户端语言）。 */
+	public static Component eventName(int index) {
+		int i = Math.max(0, Math.min(index, EVENT_KEYS.size() - 1));
+		return Component.translatable("event.magicclover." + EVENT_KEYS.get(i));
+	}
 
 	/** 重大事件用完整演出（光柱+ fireworks+ 冲击波），普通事件维持轻量演出 */
 	private static final java.util.Set<Integer> GRAND_EVENTS = java.util.Set.of(9, 15);
@@ -85,17 +95,18 @@ public final class EventSystem {
 	}
 
 	public static void triggerRandom(ServerLevel level, Player player) {
-		trigger(level, player, (int) (Math.random() * EVENT_NAMES.size()));
+		trigger(level, player, (int) (Math.random() * EVENT_KEYS.size()));
 	}
 
 	public static void trigger(ServerLevel level, Player player, int index) {
-		int i = Math.max(0, Math.min(index, EVENT_NAMES.size() - 1));
-		String name = EVENT_NAMES.get(i);
+		int i = Math.max(0, Math.min(index, EVENT_KEYS.size() - 1));
+		Component name = eventName(i);
 
 		if (ModConfig.get().eventTitle) {
-			showTitle(player, "§6§l" + name, "§e幸运事件已触发");
+			showTitle(player, Component.literal("§6§l").append(name),
+					Component.translatable("msg.magicclover.event.subtitle"));
 		}
-		Msg.send(player, Component.literal("§6[幸运事件] §e" + name + "§f！"));
+		Msg.send(player, Component.translatable("msg.magicclover.event.triggered", name));
 
 		switch (i) {
 			case 0 -> oreRain(level, player);
@@ -124,12 +135,12 @@ public final class EventSystem {
 	}
 
 	/** 屏幕中央大字。 */
-	private static void showTitle(Player player, String title, String subtitle) {
+	private static void showTitle(Player player, Component title, Component subtitle) {
 		if (!(player instanceof ServerPlayer sp)) return;
 		sp.connection.send(new ClientboundSetTitlesAnimationPacket(8, 50, 12));
-		sp.connection.send(new ClientboundSetTitleTextPacket(Component.literal(title)));
-		if (subtitle != null && !subtitle.isEmpty()) {
-			sp.connection.send(new ClientboundSetSubtitleTextPacket(Component.literal(subtitle)));
+		sp.connection.send(new ClientboundSetTitleTextPacket(title));
+		if (subtitle != null) {
+			sp.connection.send(new ClientboundSetSubtitleTextPacket(subtitle));
 		}
 	}
 
@@ -204,10 +215,10 @@ public final class EventSystem {
 
 		int fake = total - real;
 		if (fake > 0) {
-			Msg.send(player, Component.literal("§7" + total + " 本书里 §a" + real
-					+ " §7本有附魔，§8" + fake + " §7本是空壳——小心别被骗了"));
+			Msg.send(player, Component.translatable("msg.magicclover.event.book_rain.mixed",
+					total, real, fake));
 		} else {
-			Msg.send(player, Component.literal("§a这一波全是真货，赚了！"));
+			Msg.send(player, Component.translatable("msg.magicclover.event.book_rain.all_real"));
 		}
 	}
 
@@ -387,9 +398,10 @@ public final class EventSystem {
 	 */
 	private static void treasureRush(ServerLevel level, Player player) {
 		Fx.burst(level, player, ParticleTypes.HAPPY_VILLAGER, 40);
-		Msg.send(player, Component.literal("§6[幸运事件] §f宝藏散落在四周！§e白框 + 光柱 §f就是它们，快跑过去捡！"));
+		Msg.send(player, Component.translatable("msg.magicclover.event.treasure_rush"));
 		if (ModConfig.get().eventTitle) {
-			showTitle(player, "§a§l寻宝竞速", "§e寻找发光的宝藏 · 6 处");
+			showTitle(player, Component.literal("§a§l").append(eventName(16)),
+					Component.translatable("msg.magicclover.event.treasure_rush.subtitle"));
 		}
 
 		ItemStack[] loot = {
@@ -411,29 +423,33 @@ public final class EventSystem {
 	}
 
 	/**
-	 * 命运抉择：天降两个包裹，一个稳妥（固定好东西），一个赌博（血赚或空手）。
-	 * 玩家必须自己跑过去选一个捡——奖励就写在物品名字里，选择权完全在玩家。
+	 * 命运抉择：在玩家附近摆两个一模一样的箱子 + 一块告示牌。
+	 * 开一个（或砸一个），另一个立刻塌缩，强制二选一。
+	 * 掉落物会暴露答案，箱子不会。
 	 */
 	private static void fateChoice(ServerLevel level, Player player) {
 		Fx.burst(level, player, ParticleTypes.ENCHANT, 40);
 		if (ModConfig.get().eventTitle) {
-			showTitle(player, "§d§l命运抉择", "§e两个发光包裹 · 只能选一个");
+			showTitle(player, Component.literal("§d§l").append(eventName(17)),
+					Component.translatable("msg.magicclover.event.fate_choice.subtitle"));
 		}
-		Msg.send(player, Component.literal("§6[幸运事件] §f前方两个 §e发光包裹§f：§a绿名=稳妥 §d紫名=赌博§f，走过去选一个捡！"));
+		Msg.send(player, Component.translatable("msg.magicclover.event.fate_choice"));
 
-		// 稳妥袋：稳定的中上奖励
+		// 优先在附近地面摆两个真箱子；摆不出来才退回掉落物
+		if (FateChoice.start(level, player)) return;
+
+		Msg.send(player, Component.translatable("msg.magicclover.event.fate_choice.fallback"));
+
 		ItemStack safe = new ItemStack(Items.DIAMOND, 6);
 		safe.set(net.minecraft.core.component.DataComponents.ITEM_NAME,
-				Component.literal("§a[稳妥袋] §f钻石 ×6"));
-		// 赌博袋：一半概率血赚、一半概率只有少量
+				Component.translatable("item.magicclover.fate.safe"));
 		boolean jackpot = Math.random() < 0.5;
 		ItemStack gamble = jackpot
 				? new ItemStack(Items.NETHERITE_INGOT, 3)
 				: new ItemStack(Items.ROTTEN_FLESH, 4);
 		gamble.set(net.minecraft.core.component.DataComponents.ITEM_NAME,
-				Component.literal(jackpot ? "§d[赌博袋] §f???" : "§d[赌博袋] §f???"));
+				Component.translatable("item.magicclover.fate.gamble"));
 
-		// 左右各放一个，间隔明显，方便玩家二选一
 		double a = Math.random() * Math.PI * 2.0;
 		double dx = Math.cos(a) * 4;
 		double dz = Math.sin(a) * 4;
@@ -443,7 +459,8 @@ public final class EventSystem {
 		Fx.at(level, player.getX() - dx, player.getY() + 0.5, player.getZ() - dz, ParticleTypes.ENCHANT, 20, 0.8);
 	}
 
-	public static List<String> getEventNames() {
-		return new ArrayList<>(EVENT_NAMES);
+	/** 事件 id 列表（给命令 / 调试用）。 */
+	public static List<String> getEventKeys() {
+		return new ArrayList<>(EVENT_KEYS);
 	}
 }

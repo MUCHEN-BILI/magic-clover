@@ -6,6 +6,7 @@ import com.muchen.magicclover.util.CloverTier;
 import com.muchen.magicclover.util.Fx;
 import com.muchen.magicclover.util.LootEngine;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -65,22 +66,29 @@ public class CloverItem extends Item {
 
 		if (!eventTriggered && !lootNames.isEmpty()) {
 			// 把具体开出什么、多少件、分别去了哪里一次说清楚
-			java.util.List<String> parts = new java.util.ArrayList<>();
-			if (toInv > 0) parts.add("背包 " + toInv + " 件");
-			if (toPouch > 0) parts.add("口袋 " + toPouch + " 件");
-			if (toGround > 0) parts.add("地上 " + toGround + " 件");
+			java.util.List<Component> parts = new java.util.ArrayList<>();
+			if (toInv > 0) parts.add(Component.translatable("msg.magicclover.dest.inv", toInv));
+			if (toPouch > 0) parts.add(Component.translatable("msg.magicclover.dest.pouch", toPouch));
+			if (toGround > 0) parts.add(Component.translatable("msg.magicclover.dest.ground", toGround));
 
-			StringBuilder lootText = new StringBuilder();
+			MutableComponent lootComp = Component.empty();
+			boolean firstItem = true;
 			for (var e : lootNames.entrySet()) {
-				if (lootText.length() > 0) lootText.append(" §7、§f");
-				lootText.append("§7").append(e.getKey());
-				if (e.getValue() > 1) lootText.append(" §7×").append(e.getValue());
+				if (!firstItem) lootComp.append(Component.literal(" §7、§f"));
+				firstItem = false;
+				lootComp.append(Component.literal("§7" + e.getKey()));
+				if (e.getValue() > 1) lootComp.append(Component.literal(" §7×" + e.getValue()));
 			}
 
-			String text = "§a[幸运草] §f开出了 §f" + lootText
-					+ " §8→ §7" + String.join("、", parts);
-			if (toPouch > 0) text += " §8(按 P 看口袋)";
-			Msg.send(player, Component.literal(text));
+			MutableComponent destComp = Component.empty();
+			for (int i = 0; i < parts.size(); i++) {
+				if (i > 0) destComp.append(Component.literal("、"));
+				destComp.append(parts.get(i));
+			}
+
+			MutableComponent text = Component.translatable("msg.magicclover.clover.opened", lootComp, destComp);
+			if (toPouch > 0) text.append(Component.translatable("msg.magicclover.pouch_hint"));
+			Msg.send(player, text);
 		}
 		stack.consume(1, player);
 		return InteractionResult.SUCCESS;
@@ -90,8 +98,8 @@ public class CloverItem extends Item {
 	public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
 		int stars = tier.getStars();
 		tooltipComponents.accept(Component.literal("§6" + "★".repeat(stars) + "§8" + "★".repeat(5 - stars)));
-		tooltipComponents.accept(Component.literal("§7开出 §f" + tier.getRolls() + " §7份原版物品，等级越高越好"));
-		tooltipComponents.accept(Component.literal("§8右键使用 · 有几率触发特殊事件"));
+		tooltipComponents.accept(Component.translatable("tooltip.magicclover.clover.rolls", tier.getRolls()));
+		tooltipComponents.accept(Component.translatable("tooltip.magicclover.clover.usage"));
 	}
 
 	public CloverTier getTier() { return tier; }

@@ -1,0 +1,60 @@
+{
+  "display": {
+    "icon": {
+      "id": "magicclover:netherite_clover"
+    },
+    "title": {
+      "translate": "advancement.magicclover.all_tiers.title"
+    },
+    "description": {
+      "translate": "advancement.magicclover.all_tiers.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "magicclover:root",
+  "criteria": {
+    "got": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "magicclover:basic_clover"
+          },
+          {
+            "items": "magicclover:wood_clover"
+          },
+          {
+            "items": "magicclover:coal_clover"
+          },
+          {
+            "items": "magicclover:copper_clover"
+          },
+          {
+            "items": "magicclover:lapis_clover"
+          },
+          {
+            "items": "magicclover:iron_clover"
+          },
+          {
+            "items": "magicclover:gold_clover"
+          },
+          {
+            "items": "magicclover:diamond_clover"
+          },
+          {
+            "items": "magicclover:emerald_clover"
+          },
+          {
+            "items": "magicclover:netherite_clover"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 200
+  }
+}

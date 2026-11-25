@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "magicclover:event_potion"
+    },
+    "title": {
+      "translate": "advancement.magicclover.event_potion.title"
+    },
+    "description": {
+      "translate": "advancement.magicclover.event_potion.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "magicclover:root",
+  "criteria": {
+    "got": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "magicclover:event_potion"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 10
+  }
+}

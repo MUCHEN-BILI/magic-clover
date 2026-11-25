@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "magicclover:clover_bundle"
+    },
+    "title": {
+      "translate": "advancement.magicclover.bundle.title"
+    },
+    "description": {
+      "translate": "advancement.magicclover.bundle.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "magicclover:root",
+  "criteria": {
+    "got": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "magicclover:clover_bundle"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 10
+  }
+}

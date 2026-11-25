@@ -24,6 +24,11 @@ public final class StructureLoot {
 		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
 			if (!source.isBuiltin()) return;
 
+			// 只处理原版结构箱子。
+			// 之前这里漏了命名空间判断，本模组自己的战利品表（命运抉择的两个箱子）
+			// 也被当成"未知结构箱子"注入了 35% 木头草，等于白送。
+			if (!key.identifier().getNamespace().equals("minecraft")) return;
+
 			String path = key.identifier().getPath();
 			if (!path.startsWith("chests/")) return;
 

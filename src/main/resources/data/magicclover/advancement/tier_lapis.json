@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "magicclover:lapis_clover"
+    },
+    "title": {
+      "translate": "advancement.magicclover.tier_lapis.title"
+    },
+    "description": {
+      "translate": "advancement.magicclover.tier_lapis.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "magicclover:root",
+  "criteria": {
+    "got": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "magicclover:lapis_clover"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 15
+  }
+}

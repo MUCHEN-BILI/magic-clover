@@ -1,0 +1,60 @@
+{
+  "display": {
+    "icon": {
+      "id": "magicclover:basic_clover"
+    },
+    "title": {
+      "translate": "advancement.magicclover.root.title"
+    },
+    "description": {
+      "translate": "advancement.magicclover.root.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "minecraft:gui/advancements/backgrounds/husbandry"
+  },
+  "criteria": {
+    "got": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "magicclover:basic_clover"
+          },
+          {
+            "items": "magicclover:wood_clover"
+          },
+          {
+            "items": "magicclover:coal_clover"
+          },
+          {
+            "items": "magicclover:copper_clover"
+          },
+          {
+            "items": "magicclover:lapis_clover"
+          },
+          {
+            "items": "magicclover:iron_clover"
+          },
+          {
+            "items": "magicclover:gold_clover"
+          },
+          {
+            "items": "magicclover:diamond_clover"
+          },
+          {
+            "items": "magicclover:emerald_clover"
+          },
+          {
+            "items": "magicclover:netherite_clover"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 20
+  }
+}

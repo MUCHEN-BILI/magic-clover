@@ -9,6 +9,7 @@
 #   --dry-run     只演示，不改文件、不构建
 #   --no-build    跳过构建（jar 已经手动构建过）
 #   --no-commit   不自动 git commit
+#   --allow-same  版本号已经手动改过了，允许继续（默认会报"版本号没变"）
 #
 # 环境变量：
 #   MODS_DIR      测试环境 mods 目录，默认见下方
@@ -22,6 +23,7 @@ NOTE=""
 DRY=0
 SKIP_BUILD=0
 NO_COMMIT=0
+ALLOW_SAME=0
 
 usage() {
 	sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'
@@ -32,6 +34,7 @@ while [[ $# -gt 0 ]]; do
 		--dry-run)   DRY=1; shift ;;
 		--no-build)  SKIP_BUILD=1; shift ;;
 		--no-commit) NO_COMMIT=1; shift ;;
+		--allow-same) ALLOW_SAME=1; shift ;;
 		-h|--help)   usage; exit 0 ;;
 		-*)          echo "未知选项：$1" >&2; usage; exit 1 ;;
 		*)
@@ -55,7 +58,7 @@ if [[ -z "$OLD_VERSION" ]]; then
 	echo "错误：gradle.properties 里找不到 version=" >&2
 	exit 1
 fi
-if [[ "$OLD_VERSION" == "$VERSION" ]]; then
+if [[ "$OLD_VERSION" == "$VERSION" ]] && [[ $ALLOW_SAME -eq 0 ]]; then
 	echo "错误：gradle.properties 里已经是 $VERSION 了，版本号没变。" >&2
 	exit 1
 fi

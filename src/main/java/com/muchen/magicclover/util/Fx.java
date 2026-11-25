@@ -19,7 +19,12 @@ public final class Fx {
 	private Fx() {}
 
 	/**
-	 * 开草反馈。tier 越大越隆重：低档轻快提示音 + 绿色粒子，高档钟声 + 图腾光效。
+	 * 开草反馈。tier 越大越隆重。
+	 *
+	 * <p>关键改动：以前低档用的是 {@code ITEM_PICKUP}，那声"啵"又短又轻，
+	 * 和捡东西的声音混在一起基本听不见，玩家会以为"这棵草没音效"。
+	 * 现在每一档都先播一次"撕开包裹"的声音（{@code BUNDLE_DROP_CONTENTS}），
+	 * 高档再叠一层奖励音，保证任何等级都有明确的听觉反馈。</p>
 	 */
 	public static void cloverUse(ServerLevel level, Player player, InteractionHand hand, int tier) {
 		player.swing(hand, true);
@@ -28,22 +33,24 @@ public final class Fx {
 		double y = player.getY() + 1.0;
 		double z = player.getZ();
 
-		SoundEvent sound;
-		float pitch;
-		if (tier <= 2) {
-			sound = SoundEvents.ITEM_PICKUP;
-			pitch = 1.0f + tier * 0.08f;
-		} else if (tier <= 5) {
-			sound = SoundEvents.EXPERIENCE_ORB_PICKUP;
-			pitch = 1.0f + (tier - 3) * 0.1f;
-		} else if (tier <= 8) {
-			sound = SoundEvents.AMETHYST_BLOCK_CHIME;
-			pitch = 1.0f + (tier - 6) * 0.12f;
-		} else {
-			sound = SoundEvents.PLAYER_LEVELUP;
-			pitch = 1.0f;
+		float pitch = 0.95f + Math.min(tier, 9) * 0.02f;
+
+		// 统一"撕开"音：所有等级都有，音量给足
+		level.playSound(null, x, y, z, SoundEvents.BUNDLE_DROP_CONTENTS,
+				SoundSource.PLAYERS, 1.0f, pitch);
+
+		// 档位附加音：中高档在大路上听得出来是"好东西"
+		SoundEvent bonus = null;
+		float bonusVolume = 0.75f;
+		if (tier >= 6) {
+			bonus = SoundEvents.AMETHYST_BLOCK_CHIME;
+			bonusVolume = 0.85f;
+		} else if (tier >= 3) {
+			bonus = SoundEvents.EXPERIENCE_ORB_PICKUP;
 		}
-		level.playSound(null, x, y, z, sound, SoundSource.PLAYERS, 0.7f, pitch);
+		if (bonus != null) {
+			level.playSound(null, x, y, z, bonus, SoundSource.PLAYERS, bonusVolume, pitch);
+		}
 
 		level.sendParticles(ParticleTypes.HAPPY_VILLAGER, x, y, z,
 				8 + tier * 3, 0.5, 0.6, 0.5, 0.03);

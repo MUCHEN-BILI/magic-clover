@@ -60,7 +60,7 @@ public class PouchScreen extends AbstractContainerScreen<ChestMenu> {
 
 		// 搜索框占用顶部标题位置；输入后高亮匹配物品、淡化其它
 		this.searchBox = new EditBox(this.font, this.leftPos + 6, this.topPos + 2, 96, 14,
-				Component.literal("搜索口袋..."));
+				Component.translatable("gui.magicclover.pouch.search"));
 		this.searchBox.setMaxLength(64);
 		this.searchBox.setResponder(s -> this.filter = s.trim().toLowerCase(java.util.Locale.ROOT));
 		this.addRenderableWidget(this.searchBox);

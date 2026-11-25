@@ -62,10 +62,10 @@ public class CloverBundleItem extends Item {
 		}
 
 		if (jackpot) {
-			Msg.send(player, Component.literal("§6§l[幸运包裹] §e§l血赚！§f抽到了 §6§l" + name));
+			Msg.send(player, Component.translatable("msg.magicclover.bundle.jackpot", name));
 			Fx.jackpot((net.minecraft.server.level.ServerLevel) level, player, hand);
 		} else {
-			Msg.send(player, Component.literal("§6[幸运包裹] §f抽到了 §7" + name));
+			Msg.send(player, Component.translatable("msg.magicclover.bundle.opened", name));
 			Fx.cloverUse((net.minecraft.server.level.ServerLevel) level, player, hand, 4);
 		}
 
@@ -82,7 +82,7 @@ public class CloverBundleItem extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-		tooltipComponents.accept(Component.literal("§6右键抽取一个随机幸运草"));
-		tooltipComponents.accept(Component.literal("§7可能抽回普通草，也可能血赚高阶草 / 模组草 / 生物草"));
+		tooltipComponents.accept(Component.translatable("tooltip.magicclover.bundle.desc"));
+		tooltipComponents.accept(Component.translatable("tooltip.magicclover.bundle.detail"));
 	}
 }

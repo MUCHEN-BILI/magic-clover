@@ -55,8 +55,7 @@ public class MobCloverItem extends Item {
 			entity.setPos(player.getX() + 1, player.getY(), player.getZ() + 1);
 			serverLevel.addFreshEntity(entity);
 			if (!eventTriggered) {
-				String name = entity.getName().getString();
-				Msg.send(player, Component.literal("§a[生物幸运草] §f召唤了 §7" + name));
+				Msg.send(player, Component.translatable("msg.magicclover.mob_clover.summoned", entity.getDisplayName()));
 			}
 		}
 		Fx.cloverUse(serverLevel, player, hand, 6);
@@ -66,7 +65,7 @@ public class MobCloverItem extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-		tooltipComponents.accept(Component.literal("§7右键召唤 §a随机原版生物"));
-		tooltipComponents.accept(Component.literal("§7仅原版生物，不含模组生物"));
+		tooltipComponents.accept(Component.translatable("tooltip.magicclover.mob_clover.desc"));
+		tooltipComponents.accept(Component.translatable("tooltip.magicclover.mob_clover.vanilla_only"));
 	}
 }

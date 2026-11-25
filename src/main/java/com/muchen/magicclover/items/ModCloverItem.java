@@ -53,7 +53,7 @@ public class ModCloverItem extends Item {
 		}
 
 		if (loot == null || loot.isEmpty()) {
-			Msg.send(player, Component.literal("§c[模组幸运草] 没有找到可抽取的模组物品！"));
+			Msg.send(player, Component.translatable("msg.magicclover.mod_clover.empty"));
 			return InteractionResult.PASS;
 		}
 
@@ -61,7 +61,7 @@ public class ModCloverItem extends Item {
 		Fx.cloverUse(serverLevel, player, hand, 9);
 
 		if (!eventTriggered) {
-			Msg.send(player, Component.literal("§a[模组幸运草] §f开出了 §b" + loot.getDisplayName().getString()));
+			Msg.send(player, Component.translatable("msg.magicclover.mod_clover.opened", loot.getDisplayName()));
 		}
 		stack.consume(1, player);
 		return InteractionResult.SUCCESS;
@@ -69,10 +69,10 @@ public class ModCloverItem extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-		tooltipComponents.accept(Component.literal("§7右键开出 §b随机模组物品 §7(等概率)"));
+		tooltipComponents.accept(Component.translatable("tooltip.magicclover.mod_clover.desc"));
 		if (TaczCompat.isAvailable()) {
-			tooltipComponents.accept(Component.literal("§7已接入 §dTACZ§7：大概率开出枪械 / 弹药 / 配件"));
+			tooltipComponents.accept(Component.translatable("tooltip.magicclover.mod_clover.tacz"));
 		}
-		tooltipComponents.accept(Component.literal("§8有几率触发特殊事件"));
+		tooltipComponents.accept(Component.translatable("tooltip.magicclover.common.event_chance"));
 	}
 }

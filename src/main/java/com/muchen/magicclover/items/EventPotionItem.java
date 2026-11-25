@@ -95,13 +95,15 @@ public class EventPotionItem extends Item {
 		ModConfig cfg = ModConfig.get();
 		int seconds = advanced ? cfg.buffDuration : cfg.lesserBuffDuration;
 		double chance = advanced ? cfg.eventChanceBuffed : cfg.lesserEventChance;
-		tooltipComponents.accept(Component.literal(advanced ? "§d饮用后获得强烈的幸运祝福" : "§a饮用后获得幸运祝福"));
-		tooltipComponents.accept(Component.literal("§7持续 §e" + seconds + " §7秒，期间事件概率 §e"
-				+ (int) (chance * 100) + "%"));
+		tooltipComponents.accept(Component.translatable(advanced
+				? "tooltip.magicclover.potion.advanced"
+				: "tooltip.magicclover.potion.lesser"));
+		tooltipComponents.accept(Component.translatable("tooltip.magicclover.potion.duration",
+				seconds, (int) (chance * 100)));
 		if (!advanced) {
-			tooltipComponents.accept(Component.literal("§8前期就能用 · 用烈焰粉可升级成事件药水"));
+			tooltipComponents.accept(Component.translatable("tooltip.magicclover.potion.lesser_hint"));
 		}
-		tooltipComponents.accept(Component.literal("§8长按右键饮用"));
+		tooltipComponents.accept(Component.translatable("tooltip.magicclover.potion.usage"));
 	}
 
 	public boolean isAdvanced() { return advanced; }
