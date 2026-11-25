@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:pumpkin_seeds",
+    "minecraft:pumpkin_seeds",
+    "minecraft:pumpkin_seeds",
+    "minecraft:pumpkin_seeds"
+  ],
+  "result": {
+    "id": "magicclover:basic_clover",
+    "count": 1
+  }
+}

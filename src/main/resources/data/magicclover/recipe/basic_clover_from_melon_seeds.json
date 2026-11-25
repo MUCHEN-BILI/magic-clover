@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:melon_seeds",
+    "minecraft:melon_seeds",
+    "minecraft:melon_seeds",
+    "minecraft:melon_seeds"
+  ],
+  "result": {
+    "id": "magicclover:basic_clover",
+    "count": 1
+  }
+}

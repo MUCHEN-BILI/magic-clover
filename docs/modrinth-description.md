@@ -244,3 +244,10 @@ The idea comes from konwboj's classic mod *Magic Clover* (Forge, 1.6.2 – 1.12.
 随机幸运草包裹新增一条简易合成：**4 小麦 + 2 普通草 → 1 包裹**（无序），和原来的 3 皮革 + 6 普通草并存。没养牛的玩家用小麦把草捆起来就行。
 
 **English:** The random clover bundle now has a second recipe: **4 wheat + 2 basic clovers → 1 bundle** (shapeless), alongside the original leather recipe. No cow farm required.
+
+
+## 1.6.4 补充说明
+
+基础幸运草新增合成路线：**4 个相同的种子 → 1 棵基础幸运草**（小麦 / 西瓜 / 南瓜 / 甜菜 / 火把花种子均可）。
+
+**English:** Basic clovers can now be crafted from **4 identical seeds** (wheat / melon / pumpkin / beetroot / torchflower).
