@@ -17,6 +17,9 @@
     ],
     "client": [
       "com.muchen.magicclover.client.MagicCloverClient"
+    ],
+    "jei_mod_plugin": [
+      "com.muchen.magicclover.jei.CloverJeiPlugin"
     ]
   },
   "depends": {
