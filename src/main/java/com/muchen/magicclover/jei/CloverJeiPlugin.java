@@ -46,17 +46,38 @@ public class CloverJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registration) {
+		MagicCloverMod.LOGGER.info("[JEI] 注册幸运草掉落分类");
 		IGuiHelper gui = registration.getJeiHelpers().getGuiHelper();
 		registration.addRecipeCategories(new CloverLootCategory(gui));
 	}
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
+		MagicCloverMod.LOGGER.info("[JEI] 注册 {} 条幸运草掉落配方", CloverTier.values().length);
 		List<CloverLootRecipe> recipes = new ArrayList<>();
 		for (CloverTier tier : CloverTier.values()) {
 			recipes.add(new CloverLootRecipe(tier));
 		}
 		registration.addRecipes(TYPE, recipes);
+
+		// 同时给每档草挂一个 JEI「信息」页。
+		// 自定义配方类型的索引在某些版本下不会自动关联物品，信息页是 JEI 官方保证生效的路径。
+		for (CloverTier tier : CloverTier.values()) {
+			List<Item> pool = LootEngine.getPool(tier);
+			StringBuilder sb = new StringBuilder();
+			for (Item item : pool) {
+				if (sb.length() > 0) sb.append(" · ");
+				sb.append(item.getName(new net.minecraft.world.item.ItemStack(item)).getString());
+			}
+			registration.addItemStackInfo(
+					new ItemStack(itemFor(tier)),
+					Component.translatable("jei.magicclover.clover_loot.title"),
+					Component.translatable("jei.magicclover.clover_loot.chance", pool.size(), pool.size()),
+					Component.translatable("jei.magicclover.clover_loot.rolls", tier.getRolls()),
+					Component.literal("§7" + sb)
+			);
+		}
+		MagicCloverMod.LOGGER.info("[JEI] 已给 10 档幸运草挂上信息页");
 	}
 
 	/** 把等级对应到注册物品，供输入槽显示。 */
