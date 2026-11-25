@@ -105,5 +105,10 @@
   "event.magicclover.fate_choice": "Fate's Choice",
   "msg.magicclover.event.fate_choice.sign": "Safe, or gamble?",
   "msg.magicclover.event.fate_choice.chosen": "§d[Fate's Choice] §fChoice made.",
-  "msg.magicclover.event.fate_choice.fallback": "§7No room for chests nearby — the parcels dropped at your feet."
+  "msg.magicclover.event.fate_choice.fallback": "§7No room for chests nearby — the parcels dropped at your feet.",
+  "jei.magicclover.clover_loot.title": "Clover Loot Pool",
+  "jei.magicclover.clover_loot.chance": "Each roll picks 1 of %s items with equal chance (1/%s each)",
+  "jei.magicclover.clover_loot.rolls": "This tier rolls %s times, independently",
+  "jei.magicclover.clover_loot.hint": "Left: the clover. Right: its entire loot pool",
+  "jei.magicclover.clover_loot.tooltip": "Chance is not a guarantee: rolls can repeat the same item"
 }

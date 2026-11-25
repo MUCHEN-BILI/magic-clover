@@ -94,6 +94,14 @@ public final class LootEngine {
 	/**
 	 * 从原版等级池抽取一个物品。
 	 */
+	/**
+	 * 给 JEI 插件读取的只读掉落池。直接返回同一份静态列表，
+	 * 这样 JEI 页面永远和真实抽取逻辑同步，不会出现"说明写错了"的情况。
+	 */
+	public static List<Item> getPool(CloverTier tier) {
+		return VANILLA_POOLS[Math.min(tier.getLevel(), VANILLA_POOLS.length - 1)];
+	}
+
 	public static ItemStack pickVanilla(CloverTier tier) {
 		List<Item> pool = VANILLA_POOLS[Math.min(tier.getLevel(), VANILLA_POOLS.length - 1)];
 		Item item = pool.get((int) (Math.random() * pool.size()));

@@ -105,5 +105,10 @@
   "event.magicclover.fate_choice": "命运抉择",
   "msg.magicclover.event.fate_choice.sign": "稳妥，还是赌博？",
   "msg.magicclover.event.fate_choice.chosen": "§d[命运抉择] §f你做出了选择。",
-  "msg.magicclover.event.fate_choice.fallback": "§7附近找不到能放箱子的地面，包裹只好落在你脚边。"
+  "msg.magicclover.event.fate_choice.fallback": "§7附近找不到能放箱子的地面，包裹只好落在你脚边。",
+  "jei.magicclover.clover_loot.title": "幸运草可能开出什么",
+  "jei.magicclover.clover_loot.chance": "每份从 %s 种物品里等概率抽 1 种（各 1/%s）",
+  "jei.magicclover.clover_loot.rolls": "这档草一次开 %s 份，每份独立抽取",
+  "jei.magicclover.clover_loot.hint": "左边是草本身，右边是整池物品",
+  "jei.magicclover.clover_loot.tooltip": "概率不是保证：多份可能开出同一种物品"
 }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "magicclover:basic_clover",
+    "magicclover:basic_clover",
+    "minecraft:wheat",
+    "minecraft:wheat",
+    "minecraft:wheat",
+    "minecraft:wheat"
+  ],
+  "result": {
+    "id": "magicclover:clover_bundle",
+    "count": 1
+  }
+}

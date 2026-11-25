@@ -76,6 +76,12 @@ Minecraft 里"努力就有回报"的部分已经够多了，这个模组补的�
 
 成就是靠「拥有物品」触发的，不需要额外操作。所以创造模式直接拿也能解锁，它证明不了你是挖出来的，纯粹给收集控一个目标。
 
+## JEI 掉落图鉴
+
+装了 JEI 的话，在 JEI 里点任意一棵幸运草（默认 `U` 键），会多出一页「幸运草可能开出什么」：左边是草本身，右边列出这一档全部可能掉落，悬停看名字。每档独立一页，底部写明每项概率（等概率 1/N）和这份草一共抽几次。
+
+页面直接读取模组的真实掉落池，改了掉落表会自动跟着变，不会出现"说明和实际不一致"。
+
 ## 幸运口袋
 
 默认按 <kbd>P</kbd> 打开（键位可以改）。
@@ -201,6 +207,12 @@ There are 17 of them, in their own advancement tab: one per clover tier, one eac
 
 They trigger on "having the item", so creative mode unlocks them too. They're a collection goal, not a proof you mined anything.
 
+### JEI loot book
+
+With JEI installed, press `U` on any clover to open a new page: the clover on the left, its entire loot pool on the right. One page per tier, with the exact odds (equal 1/N) and how many rolls that tier gets.
+
+The page reads the real loot pool straight from the mod, so it never drifts out of sync.
+
 ### Lucky Pouch
 
 Press <kbd>P</kbd> (rebindable). 54 slots per page, paging, and a search box — type "diamond" and only diamond-related slots stay visible. Anything that would overflow your inventory goes in here instead of onto the ground, which matters when one clover hands you three items.
@@ -225,3 +237,10 @@ Minecraft 1.21.10 / 1.21.11 · Fabric Loader 0.20.1+ · Fabric API · Java 21. I
 The idea comes from konwboj's classic mod *Magic Clover* (Forge, 1.6.2 – 1.12.2), which has been abandoned for years and whose original thread is hard to find these days. This is a fresh implementation for 1.21.10 / 1.21.11: the code was written from scratch and every texture was redrawn — no assets from the original are used.
 
 "Remake" is a strong word for it. It's closer to taking the same idea and doing ten times as much with it. If the original author ever comes back, this page will cooperate with whatever they'd like.
+
+
+## 1.6.2 补充说明
+
+随机幸运草包裹新增一条简易合成：**4 小麦 + 2 普通草 → 1 包裹**（无序），和原来的 3 皮革 + 6 普通草并存。没养牛的玩家用小麦把草捆起来就行。
+
+**English:** The random clover bundle now has a second recipe: **4 wheat + 2 basic clovers → 1 bundle** (shapeless), alongside the original leather recipe. No cow farm required.

@@ -1,28 +1,31 @@
 {
-	"schemaVersion": 1,
-	"id": "magicclover",
-	"version": "${version}",
-	"name": "Magic Clover Reborn",
-	"description": "十级幸运草、两种特殊草、18 种幸运事件、幸运口袋与事件药水 | Ten clover tiers, two special clovers, 18 lucky events, a searchable pouch and event potions",
-	"authors": [
-		"Muchen"
-	],
-	"contact": {},
-	"license": "MIT",
-	"icon": "assets/magicclover/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"com.muchen.magicclover.MagicCloverMod"
-		],
-		"client": [
-			"com.muchen.magicclover.client.MagicCloverClient"
-		]
-	},
-	"depends": {
-		"fabricloader": ">=0.20.1",
-		"minecraft": ">=1.21.10 <1.22",
-		"java": ">=21",
-		"fabric-api": "*"
-	}
+  "schemaVersion": 1,
+  "id": "magicclover",
+  "version": "${version}",
+  "name": "Magic Clover Reborn",
+  "description": "十级幸运草、两种特殊草、18 种幸运事件、幸运口袋与事件药水 | Ten clover tiers, two special clovers, 18 lucky events, a searchable pouch and event potions",
+  "authors": [
+    "Muchen"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/magicclover/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.muchen.magicclover.MagicCloverMod"
+    ],
+    "client": [
+      "com.muchen.magicclover.client.MagicCloverClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": ">=1.21.10 <1.22",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "recommends": {
+    "jei": "*"
+  }
 }

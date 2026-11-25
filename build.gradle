@@ -28,6 +28,12 @@ dependencies {
 	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	// JEI 插件编译依赖：官方 API 构件（命名映射），已下载到 libs/
+	compileOnly files(
+        "libs/jei-1.21.11-common-api-27.44.0.105.jar",
+        "libs/jei-1.21.11-fabric-api-27.44.0.105.jar"
+    )
 }
 
 processResources {
