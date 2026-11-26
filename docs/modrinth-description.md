@@ -293,3 +293,10 @@ The idea comes from konwboj's classic mod *Magic Clover* (Forge, 1.6.2 – 1.12.
 枯叶草的比例调整为 80% 倒霉 / 16% 小赚 / 4% 血赚，倒霉手段从 3 种扩到 5 种：扣血（至少留 1 心）、60~120 秒负面 buff（含凋零/中毒）、掉一件背包物品到地上、**清空经验**、**随机装备损耗 25~50% 耐久**。零代价白嫖高级奖励的问题已修正。
 
 **English:** Odds rebalanced to 80% bad / 16% small win / 4% jackpot. Bad outcomes now also include XP wipe and gear durability loss, so high-tier prizes are no longer free.
+
+
+## 1.7.3 惩罚回调
+
+经验惩罚从"清空"改为**损失当前等级的 20~35%**（至少 1 级）；装备耐久损耗从 25~50% 降为 **15~30%**。保留代价但避免后期一次归零劝退。
+
+**English:** XP penalty softened from a full wipe to losing 20-35% of current levels; gear durability loss reduced to 15-30%.

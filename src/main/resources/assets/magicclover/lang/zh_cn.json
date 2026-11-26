@@ -114,13 +114,13 @@
   "jei.magicclover.clover_loot.stack": "低价值物品会成组掉落（2~16 个）",
   "item.magicclover.withered_clover": "枯叶幸运草",
   "tooltip.magicclover.withered.desc": "§8§l一场豪赌：大概率倒霉，小概率血赚",
-  "tooltip.magicclover.withered.detail": "§7打落叶堆掉落 · 4 落叶堆可合成 · 惩罚包含扣血/负面/掉物/清空经验/装备损耗",
+  "tooltip.magicclover.withered.detail": "§7打落叶堆掉落 · 4 落叶堆可合成 · 惩罚含扣血/负面/掉物/经验损失/装备损耗",
   "msg.magicclover.withered.jackpot": "§6§l[枯叶草] §e§l血赚！§f抽到了 %s",
   "msg.magicclover.withered.small": "§a[枯叶草] §f小赚：%s ×%s",
   "msg.magicclover.withered.bad.damage": "§c[枯叶草] §f倒霉：失去了 %s 颗心（至少留 1 心）",
   "msg.magicclover.withered.bad.effect": "§c[枯叶草] §f倒霉：%s §7持续 %s 秒",
   "msg.magicclover.withered.bad.drop": "§c[枯叶草] §f倒霉：掉落了 %s §7（掉在地上，没消失）",
   "msg.magicclover.withered.bad.nothing": "§c[枯叶草] §f倒霉：翻遍背包什么也没掉……算你走运",
-  "msg.magicclover.withered.bad.xp": "§c[枯叶草] §f倒霉：经验清空（§7损失 %s 级 + %s%% 进度§f）",
+  "msg.magicclover.withered.bad.xp": "§c[枯叶草] §f倒霉：损失了 %s 级经验",
   "msg.magicclover.withered.bad.gear": "§c[枯叶草] §f倒霉：%s §c损耗 %s 点耐久"
 }

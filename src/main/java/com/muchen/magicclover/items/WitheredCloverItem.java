@@ -141,15 +141,22 @@ public class WitheredCloverItem extends Item {
 				stack.getDisplayName()));
 	}
 
-	/** 清空经验——前期升级慢，这是实打实的代价；不会动物品栏。 */
+	/**
+	 * 按当前等级扣 20%~35% 经验，至少扣 1 级。
+	 * 不清空——后期攒几百级一次归零太劝退，留个"肉疼但不毁灭"的度。
+	 */
 	private void loseExperience(Player player) {
 		int levels = player.experienceLevel;
-		float points = player.experienceProgress;
-		player.experienceLevel = 0;
-		player.totalExperience = 0;
-		player.experienceProgress = 0.0f;
-		Msg.send(player, Component.translatable("msg.magicclover.withered.bad.xp", levels,
-				Math.round(points * 100)));
+		if (levels <= 0) {
+			Msg.send(player, Component.translatable("msg.magicclover.withered.bad.nothing"));
+			return;
+		}
+		int lost = Math.max(1, (int) Math.ceil(levels * (0.20 + Math.random() * 0.15)));
+		int remain = Math.max(0, levels - lost);
+		player.experienceLevel = remain;
+		player.totalExperience = Math.max(0, (int) (player.totalExperience * ((double) remain / levels)));
+		player.experienceProgress = remain == 0 ? 0.0f : player.experienceProgress;
+		Msg.send(player, Component.translatable("msg.magicclover.withered.bad.xp", lost));
 	}
 
 	/**
@@ -171,7 +178,7 @@ public class WitheredCloverItem extends Item {
 		}
 		int slot = candidates.get((int) (Math.random() * candidates.size()));
 		ItemStack stack = inventory.getItem(slot);
-		int amount = Math.max(1, stack.getMaxDamage() / (2 + (int) (Math.random() * 2)));
+		int amount = Math.max(1, (int) (stack.getMaxDamage() * (0.15 + Math.random() * 0.15)));
 		int damage = Math.min(stack.getMaxDamage() - stack.getDamageValue(), amount);
 		if (damage > 0) {
 			stack.setDamageValue(stack.getDamageValue() + damage);
