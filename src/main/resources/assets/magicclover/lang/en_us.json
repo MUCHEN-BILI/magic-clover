@@ -122,5 +122,8 @@
   "msg.magicclover.withered.bad.drop": "§c[Withered Clover] §fBad luck: dropped %s §7(on the ground, not destroyed)",
   "msg.magicclover.withered.bad.nothing": "§c[Withered Clover] §fBad luck: nothing fell out... lucky you",
   "msg.magicclover.withered.bad.xp": "§c[Withered Clover] §fBad luck: lost %s XP levels",
-  "msg.magicclover.withered.bad.gear": "§c[Withered Clover] §fBad luck: %s §clost %s durability"
+  "msg.magicclover.withered.bad.gear": "§c[Withered Clover] §fBad luck: %s §clost %s durability",
+  "msg.magicclover.withered.arena.start": "§8[Withered Clover] §7Pulled into the sky arena! Reach the glowing goal in %s seconds to escape",
+  "msg.magicclover.withered.arena.win": "§a[Withered Clover] §fYou escaped unharmed",
+  "msg.magicclover.withered.arena.lose": "§c[Withered Clover] §fChallenge failed: §7weakness for 30 seconds, back you go"
 }

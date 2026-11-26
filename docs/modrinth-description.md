@@ -300,3 +300,10 @@ The idea comes from konwboj's classic mod *Magic Clover* (Forge, 1.6.2 – 1.12.
 经验惩罚从"清空"改为**损失当前等级的 20~35%**（至少 1 级）；装备耐久损耗从 25~50% 降为 **15~30%**。保留代价但避免后期一次归零劝退。
 
 **English:** XP penalty softened from a full wipe to losing 20-35% of current levels; gear durability loss reduced to 15-30%.
+
+
+## 1.7.4 高空竞技场
+
+枯叶草的倒霉事件新增参与型玩法：有概率被传送到高空临时平台，在 60 秒内跑到发光终点即可**免罚**；超时或掉下平台只会吃 30 秒虚弱。平台会在结束时自动拆除，玩家被送回原位。
+
+**English:** Bad luck can now trigger a sky arena: reach the glowing goal on a temporary high-altitude platform within 60 seconds to escape punishment. The platform is cleaned up and you are teleported back.

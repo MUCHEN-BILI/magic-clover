@@ -66,7 +66,7 @@ public class WitheredCloverItem extends Item {
 		} else if (roll < jackpotChance + goodChance) {
 			smallWin(serverLevel, player, hand);
 		} else {
-			badLuck(serverLevel, player, hand);
+			badLuck(serverLevel, (net.minecraft.server.level.ServerPlayer) player, hand);
 		}
 		return InteractionResult.SUCCESS;
 	}
@@ -95,9 +95,13 @@ public class WitheredCloverItem extends Item {
 	}
 
 	/** 倒霉：三种惩罚里随机一个，都留后路。 */
-	private void badLuck(ServerLevel level, Player player, InteractionHand hand) {
+	private void badLuck(ServerLevel level, net.minecraft.server.level.ServerPlayer player, InteractionHand hand) {
 		switch ((int) (Math.random() * 5)) {
-			case 0 -> hurtButKeepOneHeart(player);
+			case 0 -> {
+				if (!com.muchen.magicclover.event.ArenaSystem.tryStart(level, player)) {
+					hurtButKeepOneHeart(player);
+				}
+			}
 			case 1 -> applyBadEffect(player);
 			case 2 -> dropRandomItem(level, player);
 			case 3 -> loseExperience(player);

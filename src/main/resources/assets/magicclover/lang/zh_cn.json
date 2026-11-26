@@ -122,5 +122,8 @@
   "msg.magicclover.withered.bad.drop": "§c[枯叶草] §f倒霉：掉落了 %s §7（掉在地上，没消失）",
   "msg.magicclover.withered.bad.nothing": "§c[枯叶草] §f倒霉：翻遍背包什么也没掉……算你走运",
   "msg.magicclover.withered.bad.xp": "§c[枯叶草] §f倒霉：损失了 %s 级经验",
-  "msg.magicclover.withered.bad.gear": "§c[枯叶草] §f倒霉：%s §c损耗 %s 点耐久"
+  "msg.magicclover.withered.bad.gear": "§c[枯叶草] §f倒霉：%s §c损耗 %s 点耐久",
+  "msg.magicclover.withered.arena.start": "§8[枯叶草] §7你被拉上了高空竞技场！%s 秒内摸到发光终点就能免罚",
+  "msg.magicclover.withered.arena.win": "§a[枯叶草] §f侥幸逃过一劫——什么都没损失",
+  "msg.magicclover.withered.arena.lose": "§c[枯叶草] §f挑战失败：§7短暂虚弱 30 秒，已送你回原地"
 }
