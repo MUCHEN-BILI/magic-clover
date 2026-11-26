@@ -38,69 +38,77 @@ public final class LootEngine {
 	@SuppressWarnings("unchecked")
 	private static List<Item>[] buildVanillaPools() {
 		List<Item>[] pools = new List[10];
+
+		// 低档：材料与基础物资。原铁只出现在前三档，之后退场。
 		pools[0] = List.of(Items.DIRT, Items.COBBLESTONE, Items.OAK_LOG, Items.WHEAT_SEEDS,
 				Items.APPLE, Items.FEATHER, Items.LEATHER, Items.STRING, Items.FLINT, Items.BREAD,
 				Items.OAK_PLANKS, Items.STICK, Items.TORCH, Items.COAL, Items.RAW_IRON, Items.RAW_COPPER,
-				Items.SUGAR_CANE, Items.CLAY_BALL);  // 独占：甘蔗 / 黏土球
+				Items.SUGAR_CANE, Items.CLAY_BALL, Items.OAK_SAPLING, Items.SAND, Items.GRAVEL);
 
 		pools[1] = List.of(Items.OAK_PLANKS, Items.STICK, Items.TORCH, Items.COAL, Items.RAW_IRON,
 				Items.RAW_COPPER, Items.CHARCOAL, Items.WHEAT, Items.CARROT, Items.POTATO,
 				Items.OAK_DOOR, Items.CHEST, Items.CRAFTING_TABLE, Items.FURNACE, Items.GLASS, Items.SAND,
-				Items.BARREL, Items.COMPOSTER);  // 独占：木桶 / 堆肥箱
+				Items.BARREL, Items.COMPOSTER, Items.REDSTONE, Items.LEVER, Items.CAMPFIRE);
 
 		pools[2] = List.of(Items.COAL, Items.RAW_COPPER, Items.RAW_IRON, Items.CHARCOAL, Items.CRAFTING_TABLE,
 				Items.FURNACE, Items.IRON_INGOT, Items.COPPER_INGOT, Items.LANTERN, Items.BUCKET,
 				Items.SHEARS, Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.BOOK, Items.PAPER,
-				Items.WHEAT, Items.BREAD, Items.CAKE);
+				Items.WHEAT, Items.BREAD, Items.CAKE, Items.FLINT_AND_STEEL, Items.SOUL_TORCH, Items.HOPPER);
 
-		pools[3] = List.of(Items.RAW_IRON, Items.IRON_INGOT, Items.COPPER_INGOT, Items.LANTERN,
+		pools[3] = List.of(Items.IRON_INGOT, Items.COPPER_INGOT, Items.LANTERN,
 				Items.BUCKET, Items.SHEARS, Items.RAIL, Items.MINECART, Items.IRON_HELMET,
 				Items.IRON_CHESTPLATE, Items.IRON_LEGGINGS, Items.IRON_BOOTS, Items.IRON_SWORD,
-				Items.IRON_PICKAXE, Items.CLOCK, Items.COMPASS, Items.BOOKSHELF);
+				Items.IRON_PICKAXE, Items.CLOCK, Items.COMPASS, Items.BOOKSHELF,
+				Items.COPPER_BLOCK, Items.BELL, Items.SPYGLASS, Items.POLISHED_ANDESITE);
 
-		// 青金石：介于铜和铁之间，主打青金石与基础探索物资
-		pools[4] = List.of(Items.LAPIS_LAZULI, Items.LAPIS_BLOCK, Items.RAW_IRON, Items.IRON_INGOT,
+		// 青金石：附魔主题 + 探索物资
+		pools[4] = List.of(Items.LAPIS_LAZULI, Items.LAPIS_BLOCK, Items.IRON_INGOT,
 				Items.COPPER_INGOT, Items.LANTERN, Items.COMPASS, Items.CLOCK, Items.BOOK,
 				Items.BOOKSHELF, Items.PAPER, Items.BUCKET, Items.SHEARS, Items.CHEST,
 				Items.GOLDEN_APPLE, Items.ENDER_PEARL,
-				Items.SEA_LANTERN, Items.PRISMARINE);  // 独占：海晶灯 / 海晶石
+				Items.SEA_LANTERN, Items.PRISMARINE, Items.ENCHANTING_TABLE, Items.AMETHYST_SHARD);
 
+		// 铁 / 金档：信标不再铺满全档，只留后期
 		pools[5] = List.of(Items.IRON_INGOT, Items.GOLD_INGOT, Items.BUCKET, Items.MINECART,
 				Items.IRON_PICKAXE, Items.IRON_SWORD, Items.IRON_HELMET, Items.IRON_CHESTPLATE,
 				Items.GOLDEN_APPLE, Items.GOLDEN_CARROT, Items.GLISTERING_MELON_SLICE,
-				Items.ENCHANTING_TABLE, Items.BEACON, Items.HOPPER, Items.PISTON, Items.OBSERVER,
-				Items.DISPENSER, Items.CLOCK, Items.COMPASS, Items.SPYGLASS);
+				Items.ENCHANTING_TABLE, Items.HOPPER, Items.PISTON, Items.OBSERVER,
+				Items.DISPENSER, Items.SPYGLASS, Items.IRON_BLOCK, Items.ANVIL, Items.CAULDRON);
 
 		pools[6] = List.of(Items.GOLD_INGOT, Items.GOLDEN_APPLE, Items.ENCHANTING_TABLE,
-				Items.BEACON, Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_SWORD,
+				Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_SWORD,
 				Items.DIAMOND, Items.ENDER_PEARL, Items.BLAZE_ROD, Items.GHAST_TEAR,
-				Items.NETHER_WART, Items.MAGMA_CREAM, Items.ENDER_EYE, Items.FIREWORK_ROCKET,
-				Items.MUSIC_DISC_CAT, Items.ANVIL, Items.CHEST, Items.TRIDENT);
+				Items.NETHER_WART, Items.MAGMA_CREAM, Items.ENDER_EYE,
+				Items.GOLD_BLOCK, Items.GOLDEN_BOOTS, Items.GOLDEN_LEGGINGS,
+				Items.FIREWORK_ROCKET, Items.TNT, Items.REDSTONE_BLOCK);
 
+		// 钻石档：鞘翅/图腾/海洋之心独占，龙蛋已移除
 		pools[7] = List.of(Items.DIAMOND, Items.DIAMOND_SWORD, Items.DIAMOND_PICKAXE,
 				Items.DIAMOND_HELMET, Items.DIAMOND_CHESTPLATE, Items.DIAMOND_LEGGINGS,
 				Items.DIAMOND_BOOTS, Items.DIAMOND_BLOCK, Items.ENDER_EYE, Items.ELYTRA,
 				Items.END_ROD, Items.PURPUR_BLOCK, Items.SHULKER_BOX, Items.TOTEM_OF_UNDYING,
-				Items.HEART_OF_THE_SEA, Items.CONDUIT, Items.SEA_LANTERN, Items.BEACON,
-				Items.ENCHANTED_BOOK, Items.NETHER_STAR,
-				Items.DIAMOND_AXE, Items.DIAMOND_SHOVEL);  // 独占：钻石斧 / 铲
+				Items.HEART_OF_THE_SEA, Items.SEA_LANTERN, Items.BEACON,
+				Items.ENCHANTED_BOOK, Items.DIAMOND_AXE, Items.DIAMOND_SHOVEL,
+				Items.DIAMOND_HORSE_ARMOR, Items.OBSIDIAN, Items.ENDER_CHEST);
 
+		// 绿宝石档：下界之星、潮涌核心、回响碎片
 		pools[8] = List.of(Items.EMERALD, Items.EMERALD_BLOCK, Items.DIAMOND_BLOCK,
 				Items.DIAMOND_SWORD, Items.DIAMOND_PICKAXE, Items.DIAMOND_CHESTPLATE,
-				Items.ELYTRA, Items.TOTEM_OF_UNDYING, Items.HEART_OF_THE_SEA,
-				Items.NETHER_STAR, Items.END_CRYSTAL, Items.DRAGON_EGG, Items.ENCHANTED_BOOK,
-				Items.EXPERIENCE_BOTTLE, Items.GOLDEN_APPLE, Items.ENCHANTING_TABLE,
-				Items.BEACON, Items.CONDUIT,
-				Items.ECHO_SHARD, Items.AMETHYST_SHARD);  // 独占：回响碎片 / 紫水晶碎片（移除盾牌、三叉戟）
+				Items.TOTEM_OF_UNDYING, Items.NETHER_STAR, Items.END_CRYSTAL,
+				Items.ENCHANTED_BOOK, Items.EXPERIENCE_BOTTLE, Items.GOLDEN_APPLE,
+				Items.ENCHANTING_TABLE, Items.BEACON, Items.CONDUIT,
+				Items.ECHO_SHARD, Items.AMETHYST_SHARD, Items.SHULKER_SHELL,
+				Items.NAUTILUS_SHELL, Items.SLIME_BLOCK, Items.OBSIDIAN, Items.ENDER_CHEST);
 
+		// 下界合金档：终局实用品，龙蛋/盾牌/三叉戟已移除
 		pools[9] = List.of(Items.NETHERITE_INGOT, Items.NETHERITE_SWORD, Items.NETHERITE_PICKAXE,
 				Items.NETHERITE_HELMET, Items.NETHERITE_CHESTPLATE, Items.NETHERITE_LEGGINGS,
-				Items.NETHERITE_BOOTS, Items.NETHERITE_BLOCK, Items.NETHER_STAR, Items.DRAGON_EGG,
+				Items.NETHERITE_BOOTS, Items.NETHERITE_BLOCK, Items.NETHER_STAR,
 				Items.ELYTRA, Items.TOTEM_OF_UNDYING, Items.ENCHANTED_BOOK,
 				Items.EXPERIENCE_BOTTLE, Items.BEACON, Items.CONDUIT, Items.END_CRYSTAL,
 				Items.HEART_OF_THE_SEA, Items.NETHERITE_SCRAP,
-				Items.ANCIENT_DEBRIS, Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE);  // 独占：远古残骸 / 下界合金升级模板（移除盾牌、三叉戟）
-
+				Items.ANCIENT_DEBRIS, Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,
+				Items.SHULKER_SHELL, Items.OBSIDIAN, Items.ENDER_CHEST, Items.ENDER_EYE);
 		return pools;
 	}
 
@@ -119,7 +127,10 @@ public final class LootEngine {
 			Items.OAK_DOOR, Items.BARREL, Items.COMPOSTER, Items.CLAY_BALL, Items.SUGAR_CANE,
 			Items.PISTON, Items.OBSERVER, Items.HOPPER, Items.DISPENSER, Items.CLOCK,
 			Items.COMPASS, Items.SPYGLASS, Items.ANVIL, Items.COAL, Items.CHARCOAL,
-			Items.RAW_IRON, Items.RAW_COPPER, Items.COPPER_INGOT);
+			Items.RAW_IRON, Items.RAW_COPPER, Items.COPPER_INGOT, Items.SUGAR_CANE,
+			Items.CLAY_BALL, Items.OAK_SAPLING, Items.SAND, Items.GRAVEL, Items.LEVER,
+			Items.CAMPFIRE, Items.FLINT_AND_STEEL, Items.SOUL_TORCH, Items.RAIL,
+			Items.MINECART, Items.CAULDRON, Items.TNT, Items.FIREWORK_ROCKET, Items.CAKE);
 
 	private static final Set<Item> RARE_LOOT = Set.of(
 			Items.GOLDEN_APPLE, Items.GOLDEN_CARROT, Items.GLISTERING_MELON_SLICE,
@@ -129,11 +140,33 @@ public final class LootEngine {
 			Items.EMERALD_BLOCK, Items.SEA_LANTERN, Items.PRISMARINE, Items.ECHO_SHARD,
 			Items.AMETHYST_SHARD, Items.DIAMOND, Items.EMERALD, Items.NETHERITE_SCRAP,
 			Items.ANCIENT_DEBRIS, Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE, Items.TRIDENT,
-			Items.LAPIS_BLOCK);
+			Items.LAPIS_BLOCK, Items.ENDER_CHEST, Items.SHULKER_BOX, Items.SHULKER_SHELL,
+			Items.OBSIDIAN, Items.NAUTILUS_SHELL, Items.SLIME_BLOCK, Items.ENDER_EYE,
+			Items.POLISHED_ANDESITE, Items.COPPER_BLOCK, Items.BELL, Items.REDSTONE_BLOCK);
 
+	// 注意：龙蛋已移出奖池——一个世界只有一颗，它是通关奖杯，不该从草里随机开出来。
 	private static final Set<Item> LEGENDARY_LOOT = Set.of(
-			Items.ELYTRA, Items.NETHER_STAR, Items.DRAGON_EGG, Items.HEART_OF_THE_SEA,
+			Items.ELYTRA, Items.NETHER_STAR, Items.HEART_OF_THE_SEA,
 			Items.CONDUIT, Items.TOTEM_OF_UNDYING);
+
+	/** 低价值物品：抽到时会给一组，而不是孤零零一个。 */
+	private static final Set<Item> COUNT_LOOT = Set.of(
+			Items.DIRT, Items.COBBLESTONE, Items.OAK_LOG, Items.WHEAT_SEEDS, Items.APPLE,
+			Items.FEATHER, Items.LEATHER, Items.STRING, Items.FLINT, Items.BREAD,
+			Items.OAK_PLANKS, Items.STICK, Items.TORCH, Items.SAND, Items.GRAVEL,
+			Items.WHEAT, Items.CARROT, Items.POTATO, Items.PAPER, Items.BOOK, Items.COAL,
+			Items.CHARCOAL, Items.RAW_IRON, Items.RAW_COPPER, Items.COPPER_INGOT,
+			Items.IRON_INGOT, Items.GOLD_INGOT, Items.REDSTONE, Items.LAPIS_LAZULI,
+			Items.SUGAR_CANE, Items.CLAY_BALL, Items.OAK_SAPLING, Items.AMETHYST_SHARD,
+			Items.END_ROD, Items.PURPUR_BLOCK, Items.PRISMARINE, Items.NETHER_WART,
+			Items.BLAZE_ROD, Items.MAGMA_CREAM, Items.EXPERIENCE_BOTTLE);
+
+	/** 真正不值钱的基础方块：给更大的一组（2~16）。 */
+	private static final Set<Item> BULK_LOOT = Set.of(
+			Items.DIRT, Items.COBBLESTONE, Items.OAK_LOG, Items.OAK_PLANKS, Items.STICK,
+			Items.TORCH, Items.SAND, Items.GRAVEL, Items.WHEAT_SEEDS, Items.APPLE,
+			Items.FEATHER, Items.STRING, Items.FLINT, Items.BREAD, Items.PAPER,
+			Items.COAL, Items.CHARCOAL, Items.RAW_IRON, Items.RAW_COPPER);
 
 	/** 物品权重：越常见越容易抽到。 */
 	private static int weightOf(Item item) {
@@ -168,6 +201,11 @@ public final class LootEngine {
 		}
 
 		ItemStack stack = new ItemStack(item);
+		// 低价值的可堆叠物品成组掉落：让"泥土、木棍、铁锭"这种单件不像空气
+		if (stack.isStackable() && COUNT_LOOT.contains(item)) {
+			int max = BULK_LOOT.contains(item) ? 16 : 6;
+			stack.setCount(1 + (int) (Math.random() * max));
+		}
 		// 附魔书不能是空壳：抽一条随机附魔（等级也随机），和原版附魔书一致
 		if (item == Items.ENCHANTED_BOOK && level != null) {
 			enchantBookRandomly(level, stack);

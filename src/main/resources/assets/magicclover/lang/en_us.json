@@ -110,5 +110,6 @@
   "jei.magicclover.clover_loot.chance": "Each roll picks 1 of %s items (rares are less likely)",
   "jei.magicclover.clover_loot.rolls": "This tier rolls %s times, independently",
   "jei.magicclover.clover_loot.hint": "Left: the clover. Right: its entire loot pool",
-  "jei.magicclover.clover_loot.tooltip": "Chance is not a guarantee: rolls can repeat the same item"
+  "jei.magicclover.clover_loot.tooltip": "Chance is not a guarantee: rolls can repeat the same item",
+  "jei.magicclover.clover_loot.stack": "Low-value items drop in stacks (2-16)"
 }

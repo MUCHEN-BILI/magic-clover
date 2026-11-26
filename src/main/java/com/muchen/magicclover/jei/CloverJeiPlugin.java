@@ -74,6 +74,7 @@ public class CloverJeiPlugin implements IModPlugin {
 					Component.translatable("jei.magicclover.clover_loot.title"),
 					Component.translatable("jei.magicclover.clover_loot.chance", pool.size()),
 					Component.translatable("jei.magicclover.clover_loot.rolls", tier.getRolls()),
+					Component.translatable("jei.magicclover.clover_loot.stack"),
 					Component.literal("§7" + sb)
 			);
 		}

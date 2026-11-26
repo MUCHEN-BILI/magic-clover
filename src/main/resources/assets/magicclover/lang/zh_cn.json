@@ -110,5 +110,6 @@
   "jei.magicclover.clover_loot.chance": "每份从 %s 种物品中抽 1 种（稀有物品概率更低）",
   "jei.magicclover.clover_loot.rolls": "这档草一次开 %s 份，每份独立抽取",
   "jei.magicclover.clover_loot.hint": "左边是草本身，右边是整池物品",
-  "jei.magicclover.clover_loot.tooltip": "概率不是保证：多份可能开出同一种物品"
+  "jei.magicclover.clover_loot.tooltip": "概率不是保证：多份可能开出同一种物品",
+  "jei.magicclover.clover_loot.stack": "低价值物品会成组掉落（2~16 个）"
 }
