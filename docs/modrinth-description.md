@@ -279,3 +279,10 @@ The idea comes from konwboj's classic mod *Magic Clover* (Forge, 1.6.2 – 1.12.
 新增一种从**落叶堆**小概率掉落的赌博草：**枯叶幸运草**。右键开启时约 75% 倒霉、20% 小赚、5% 血赚。倒霉包括扣血、30~60 秒负面 buff、随机掉一件背包物品到地上——惩罚都有下限，不会一击必杀，也不会销毁物品。概率可在配置里调整。
 
 **English:** The Withered Clover is a gamble item dropped by leaf litter. Right-click: ~75% bad luck (damage capped at 1 heart remaining, timed debuffs, or an item dropped on the ground), 20% small win, 5% jackpot. Odds are configurable.
+
+
+## 1.7.1 补充说明
+
+枯叶幸运草新增合成路线：**4 个落叶堆 → 1 枯叶幸运草**（无序）。打落叶堆本身也会小概率掉落。
+
+**English:** Withered clovers can also be crafted from **4 leaf litter** (shapeless), in addition to the small drop chance from breaking leaf litter.

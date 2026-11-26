@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:leaf_litter",
+    "minecraft:leaf_litter",
+    "minecraft:leaf_litter",
+    "minecraft:leaf_litter"
+  ],
+  "result": {
+    "id": "magicclover:withered_clover",
+    "count": 1
+  }
+}
