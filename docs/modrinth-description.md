@@ -307,3 +307,10 @@ The idea comes from konwboj's classic mod *Magic Clover* (Forge, 1.6.2 – 1.12.
 枯叶草的倒霉事件新增参与型玩法：有概率被传送到高空临时平台，在 60 秒内跑到发光终点即可**免罚**；超时或掉下平台只会吃 30 秒虚弱。平台会在结束时自动拆除，玩家被送回原位。
 
 **English:** Bad luck can now trigger a sky arena: reach the glowing goal on a temporary high-altitude platform within 60 seconds to escape punishment. The platform is cleaned up and you are teleported back.
+
+
+## 1.7.5
+
+枯叶幸运草已加入模组创造模式物品栏。
+
+**English:** Withered clover added to the mod's creative tab.
