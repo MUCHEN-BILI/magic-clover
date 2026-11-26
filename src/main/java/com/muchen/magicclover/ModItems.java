@@ -35,6 +35,9 @@ public final class ModItems {
 	// ===== 特殊幸运草 =====
 	public static final Item MOD_CLOVER = register("mod_clover", ModCloverItem::new, new Item.Properties().stacksTo(64));
 	public static final Item MOB_CLOVER = register("mob_clover", MobCloverItem::new, new Item.Properties().stacksTo(64));
+	/** 枯叶幸运草：打落叶堆掉落，赌博型负面草 */
+	public static final Item WITHERED_CLOVER = register("withered_clover", WitheredCloverItem::new,
+			new Item.Properties().stacksTo(64));
 
 	// ===== 功能物品 =====
 	public static final Item CLOVER_BUNDLE = register("clover_bundle", CloverBundleItem::new, new Item.Properties().stacksTo(16));

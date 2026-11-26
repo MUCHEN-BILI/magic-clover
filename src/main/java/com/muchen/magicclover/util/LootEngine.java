@@ -283,6 +283,11 @@ public final class LootEngine {
 		return stack;
 	}
 
+	/** 给附魔书挂一条随机附魔（供枯叶草血奖等外部调用）。 */
+	public static void enchantRandomly(ServerLevel level, ItemStack stack) {
+		enchantBookRandomly(level, stack);
+	}
+
 	private static void enchantBookRandomly(ServerLevel level, ItemStack stack) {
 		try {
 			Registry<Enchantment> registry = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);

@@ -23,9 +23,12 @@ public final class LootModifiers {
 	public static void register() {
 		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
 			if (!source.isBuiltin()) return;
-			if (!isGrassTable(key)) return;
+			boolean isGrass = isGrassTable(key);
+			boolean isLitter = key.identifier().getPath().equals("blocks/leaf_litter");
+			if (!isGrass && !isLitter) return;
 
-			float chance = (float) Math.max(0.0, Math.min(1.0, ModConfig.get().grassDropChance));
+			float chance = (float) Math.max(0.0, Math.min(1.0,
+					isLitter ? ModConfig.get().witheredDropChance : ModConfig.get().grassDropChance));
 			if (chance <= 0.0f) return;
 
 			int cloverWeight = Math.max(1, Math.round(chance * TOTAL_WEIGHT));
@@ -33,7 +36,8 @@ public final class LootModifiers {
 
 			LootPool.Builder pool = new LootPool.Builder()
 					.setRolls(ConstantValue.exactly(1))
-					.add(LootItem.lootTableItem(ModItems.BASIC_CLOVER).setWeight(cloverWeight));
+					.add(LootItem.lootTableItem(isLitter ? ModItems.WITHERED_CLOVER : ModItems.BASIC_CLOVER)
+							.setWeight(cloverWeight));
 
 			if (emptyWeight > 0) {
 				pool.add(EmptyLootItem.emptyItem().setWeight(emptyWeight));

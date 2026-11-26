@@ -18,6 +18,12 @@ public class ModConfig {
 
 	/** 打草掉落普通幸运草的概率 */
 	public float grassDropChance = 0.08f;
+	/** 打落叶堆掉落枯叶幸运草的概率 */
+	public float witheredDropChance = 0.05f;
+	/** 枯叶草血赚概率 */
+	public double witheredJackpotChance = 0.05;
+	/** 枯叶草小赚概率（血赚之后剩下的部分） */
+	public double witheredGoodChance = 0.20;
 	/** 结构箱子里刷出幸运草的概率（0~1）。结构本身不常见，默认给到 35% 让探索能明显感知到。 */
 	public float structureCloverChance = 0.35f;
 	/** 平时开草触发事件的概率 */

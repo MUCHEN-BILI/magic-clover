@@ -111,5 +111,14 @@
   "jei.magicclover.clover_loot.rolls": "这档草一次开 %s 份，每份独立抽取",
   "jei.magicclover.clover_loot.hint": "左边是草本身，右边是整池物品",
   "jei.magicclover.clover_loot.tooltip": "概率不是保证：多份可能开出同一种物品",
-  "jei.magicclover.clover_loot.stack": "低价值物品会成组掉落（2~16 个）"
+  "jei.magicclover.clover_loot.stack": "低价值物品会成组掉落（2~16 个）",
+  "item.magicclover.withered_clover": "枯叶幸运草",
+  "tooltip.magicclover.withered.desc": "§8§l一场豪赌：大概率倒霉，小概率血赚",
+  "tooltip.magicclover.withered.detail": "§7来自落叶堆。惩罚有下限，血赚有惊喜",
+  "msg.magicclover.withered.jackpot": "§6§l[枯叶草] §e§l血赚！§f抽到了 %s",
+  "msg.magicclover.withered.small": "§a[枯叶草] §f小赚：%s ×%s",
+  "msg.magicclover.withered.bad.damage": "§c[枯叶草] §f倒霉：失去了 %s 颗心（至少留 1 心）",
+  "msg.magicclover.withered.bad.effect": "§c[枯叶草] §f倒霉：%s §7持续 %s 秒",
+  "msg.magicclover.withered.bad.drop": "§c[枯叶草] §f倒霉：掉落了 %s §7（掉在地上，没消失）",
+  "msg.magicclover.withered.bad.nothing": "§c[枯叶草] §f倒霉：翻遍背包什么也没掉……算你走运"
 }
