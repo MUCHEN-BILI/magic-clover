@@ -72,7 +72,7 @@ public class CloverJeiPlugin implements IModPlugin {
 			registration.addItemStackInfo(
 					new ItemStack(itemFor(tier)),
 					Component.translatable("jei.magicclover.clover_loot.title"),
-					Component.translatable("jei.magicclover.clover_loot.chance", pool.size(), pool.size()),
+					Component.translatable("jei.magicclover.clover_loot.chance", pool.size()),
 					Component.translatable("jei.magicclover.clover_loot.rolls", tier.getRolls()),
 					Component.literal("§7" + sb)
 			);
@@ -169,7 +169,7 @@ public class CloverJeiPlugin implements IModPlugin {
 
 			// 规则说明：等概率 + 份数
 			guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font,
-					Component.translatable("jei.magicclover.clover_loot.chance", pool.size(), pool.size()),
+					Component.translatable("jei.magicclover.clover_loot.chance", pool.size()),
 					8, 78, 0xAAAAAA, false);
 			guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font,
 					Component.translatable("jei.magicclover.clover_loot.rolls", tier.getRolls()),

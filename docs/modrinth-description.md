@@ -258,3 +258,10 @@ The idea comes from konwboj's classic mod *Magic Clover* (Forge, 1.6.2 – 1.12.
 修复附魔书空壳：从草里开出的附魔书现在带 1 条随机附魔；「天降附魔书」事件的真书也从 1~3 条改为固定 1 条。
 
 **English:** Enchanted books from clovers now always carry one random enchantment. The book-rain event's real books are capped at one enchantment too.
+
+
+## 1.6.6 补充说明
+
+奖池重平衡：按稀有度加权抽取（不是等概率）。传说物品从"每档约 14%"降到单件约 2%；每档新增 2~3 件独占物品，清掉高档里的盾牌等填充物。JEI 图鉴里的说明文字也同步更新。
+
+**English:** Loot pools are now weighted by rarity instead of uniform. Legendary items dropped from ~14% to ~2% each. Each tier gained exclusive items, and filler like shields was removed from high tiers.

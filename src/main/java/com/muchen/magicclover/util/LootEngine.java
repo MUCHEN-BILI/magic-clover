@@ -20,6 +20,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 抽取引擎：负责从各物品池随机抽取并生成掉落物。
@@ -39,11 +40,13 @@ public final class LootEngine {
 		List<Item>[] pools = new List[10];
 		pools[0] = List.of(Items.DIRT, Items.COBBLESTONE, Items.OAK_LOG, Items.WHEAT_SEEDS,
 				Items.APPLE, Items.FEATHER, Items.LEATHER, Items.STRING, Items.FLINT, Items.BREAD,
-				Items.OAK_PLANKS, Items.STICK, Items.TORCH, Items.COAL, Items.RAW_IRON, Items.RAW_COPPER);
+				Items.OAK_PLANKS, Items.STICK, Items.TORCH, Items.COAL, Items.RAW_IRON, Items.RAW_COPPER,
+				Items.SUGAR_CANE, Items.CLAY_BALL);  // 独占：甘蔗 / 黏土球
 
 		pools[1] = List.of(Items.OAK_PLANKS, Items.STICK, Items.TORCH, Items.COAL, Items.RAW_IRON,
 				Items.RAW_COPPER, Items.CHARCOAL, Items.WHEAT, Items.CARROT, Items.POTATO,
-				Items.OAK_DOOR, Items.CHEST, Items.CRAFTING_TABLE, Items.FURNACE, Items.GLASS, Items.SAND);
+				Items.OAK_DOOR, Items.CHEST, Items.CRAFTING_TABLE, Items.FURNACE, Items.GLASS, Items.SAND,
+				Items.BARREL, Items.COMPOSTER);  // 独占：木桶 / 堆肥箱
 
 		pools[2] = List.of(Items.COAL, Items.RAW_COPPER, Items.RAW_IRON, Items.CHARCOAL, Items.CRAFTING_TABLE,
 				Items.FURNACE, Items.IRON_INGOT, Items.COPPER_INGOT, Items.LANTERN, Items.BUCKET,
@@ -59,7 +62,8 @@ public final class LootEngine {
 		pools[4] = List.of(Items.LAPIS_LAZULI, Items.LAPIS_BLOCK, Items.RAW_IRON, Items.IRON_INGOT,
 				Items.COPPER_INGOT, Items.LANTERN, Items.COMPASS, Items.CLOCK, Items.BOOK,
 				Items.BOOKSHELF, Items.PAPER, Items.BUCKET, Items.SHEARS, Items.CHEST,
-				Items.GOLDEN_APPLE, Items.ENDER_PEARL);
+				Items.GOLDEN_APPLE, Items.ENDER_PEARL,
+				Items.SEA_LANTERN, Items.PRISMARINE);  // 独占：海晶灯 / 海晶石
 
 		pools[5] = List.of(Items.IRON_INGOT, Items.GOLD_INGOT, Items.BUCKET, Items.MINECART,
 				Items.IRON_PICKAXE, Items.IRON_SWORD, Items.IRON_HELMET, Items.IRON_CHESTPLATE,
@@ -78,21 +82,24 @@ public final class LootEngine {
 				Items.DIAMOND_BOOTS, Items.DIAMOND_BLOCK, Items.ENDER_EYE, Items.ELYTRA,
 				Items.END_ROD, Items.PURPUR_BLOCK, Items.SHULKER_BOX, Items.TOTEM_OF_UNDYING,
 				Items.HEART_OF_THE_SEA, Items.CONDUIT, Items.SEA_LANTERN, Items.BEACON,
-				Items.ENCHANTED_BOOK, Items.NETHER_STAR);
+				Items.ENCHANTED_BOOK, Items.NETHER_STAR,
+				Items.DIAMOND_AXE, Items.DIAMOND_SHOVEL);  // 独占：钻石斧 / 铲
 
 		pools[8] = List.of(Items.EMERALD, Items.EMERALD_BLOCK, Items.DIAMOND_BLOCK,
 				Items.DIAMOND_SWORD, Items.DIAMOND_PICKAXE, Items.DIAMOND_CHESTPLATE,
 				Items.ELYTRA, Items.TOTEM_OF_UNDYING, Items.HEART_OF_THE_SEA,
 				Items.NETHER_STAR, Items.END_CRYSTAL, Items.DRAGON_EGG, Items.ENCHANTED_BOOK,
 				Items.EXPERIENCE_BOTTLE, Items.GOLDEN_APPLE, Items.ENCHANTING_TABLE,
-				Items.BEACON, Items.CONDUIT, Items.SHIELD, Items.TRIDENT);
+				Items.BEACON, Items.CONDUIT,
+				Items.ECHO_SHARD, Items.AMETHYST_SHARD);  // 独占：回响碎片 / 紫水晶碎片（移除盾牌、三叉戟）
 
 		pools[9] = List.of(Items.NETHERITE_INGOT, Items.NETHERITE_SWORD, Items.NETHERITE_PICKAXE,
 				Items.NETHERITE_HELMET, Items.NETHERITE_CHESTPLATE, Items.NETHERITE_LEGGINGS,
 				Items.NETHERITE_BOOTS, Items.NETHERITE_BLOCK, Items.NETHER_STAR, Items.DRAGON_EGG,
 				Items.ELYTRA, Items.TOTEM_OF_UNDYING, Items.ENCHANTED_BOOK,
 				Items.EXPERIENCE_BOTTLE, Items.BEACON, Items.CONDUIT, Items.END_CRYSTAL,
-				Items.HEART_OF_THE_SEA, Items.SHIELD, Items.TRIDENT, Items.NETHERITE_SCRAP);
+				Items.HEART_OF_THE_SEA, Items.NETHERITE_SCRAP,
+				Items.ANCIENT_DEBRIS, Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE);  // 独占：远古残骸 / 下界合金升级模板（移除盾牌、三叉戟）
 
 		return pools;
 	}
@@ -100,6 +107,42 @@ public final class LootEngine {
 	/**
 	 * 从原版等级池抽取一个物品。
 	 */
+	// ============ 加权抽取 ============
+	// 四档权重：常见 20 / 普通 12 / 稀有 6 / 传说 1。
+	// 目的是让"稀有东西真的稀有"——传说物品单件概率压到约 1%，而不是 1/N。
+	private static final Set<Item> COMMON_LOOT = Set.of(
+			Items.DIRT, Items.COBBLESTONE, Items.OAK_LOG, Items.WHEAT_SEEDS, Items.APPLE,
+			Items.FEATHER, Items.LEATHER, Items.STRING, Items.FLINT, Items.BREAD,
+			Items.OAK_PLANKS, Items.STICK, Items.TORCH, Items.SAND, Items.GLASS,
+			Items.WHEAT, Items.CARROT, Items.POTATO, Items.PAPER, Items.BOOK, Items.CAKE,
+			Items.CHEST, Items.FURNACE, Items.CRAFTING_TABLE, Items.BOOKSHELF, Items.RAIL,
+			Items.OAK_DOOR, Items.BARREL, Items.COMPOSTER, Items.CLAY_BALL, Items.SUGAR_CANE,
+			Items.PISTON, Items.OBSERVER, Items.HOPPER, Items.DISPENSER, Items.CLOCK,
+			Items.COMPASS, Items.SPYGLASS, Items.ANVIL, Items.COAL, Items.CHARCOAL,
+			Items.RAW_IRON, Items.RAW_COPPER, Items.COPPER_INGOT);
+
+	private static final Set<Item> RARE_LOOT = Set.of(
+			Items.GOLDEN_APPLE, Items.GOLDEN_CARROT, Items.GLISTERING_MELON_SLICE,
+			Items.ENDER_PEARL, Items.ENDER_EYE, Items.BLAZE_ROD, Items.GHAST_TEAR,
+			Items.NETHER_WART, Items.MAGMA_CREAM, Items.END_CRYSTAL, Items.BEACON,
+			Items.ENCHANTED_BOOK, Items.EXPERIENCE_BOTTLE, Items.DIAMOND_BLOCK,
+			Items.EMERALD_BLOCK, Items.SEA_LANTERN, Items.PRISMARINE, Items.ECHO_SHARD,
+			Items.AMETHYST_SHARD, Items.DIAMOND, Items.EMERALD, Items.NETHERITE_SCRAP,
+			Items.ANCIENT_DEBRIS, Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE, Items.TRIDENT,
+			Items.LAPIS_BLOCK);
+
+	private static final Set<Item> LEGENDARY_LOOT = Set.of(
+			Items.ELYTRA, Items.NETHER_STAR, Items.DRAGON_EGG, Items.HEART_OF_THE_SEA,
+			Items.CONDUIT, Items.TOTEM_OF_UNDYING);
+
+	/** 物品权重：越常见越容易抽到。 */
+	private static int weightOf(Item item) {
+		if (LEGENDARY_LOOT.contains(item)) return 1;
+		if (RARE_LOOT.contains(item)) return 6;
+		if (COMMON_LOOT.contains(item)) return 20;
+		return 12;  // 普通资源 / 工具 / 装备
+	}
+
 	/**
 	 * 给 JEI 插件读取的只读掉落池。直接返回同一份静态列表，
 	 * 这样 JEI 页面永远和真实抽取逻辑同步，不会出现"说明写错了"的情况。
@@ -110,7 +153,20 @@ public final class LootEngine {
 
 	public static ItemStack pickVanilla(CloverTier tier, ServerLevel level) {
 		List<Item> pool = VANILLA_POOLS[Math.min(tier.getLevel(), VANILLA_POOLS.length - 1)];
-		Item item = pool.get((int) (Math.random() * pool.size()));
+
+		// 按权重抽一个。池子很小（20 件左右），线性扫描足够快。
+		int total = 0;
+		for (Item candidate : pool) total += weightOf(candidate);
+		int ticket = (int) (Math.random() * total);
+		Item item = pool.get(pool.size() - 1);
+		for (Item candidate : pool) {
+			ticket -= weightOf(candidate);
+			if (ticket < 0) {
+				item = candidate;
+				break;
+			}
+		}
+
 		ItemStack stack = new ItemStack(item);
 		// 附魔书不能是空壳：抽一条随机附魔（等级也随机），和原版附魔书一致
 		if (item == Items.ENCHANTED_BOOK && level != null) {
