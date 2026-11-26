@@ -286,3 +286,10 @@ The idea comes from konwboj's classic mod *Magic Clover* (Forge, 1.6.2 – 1.12.
 枯叶幸运草新增合成路线：**4 个落叶堆 → 1 枯叶幸运草**（无序）。打落叶堆本身也会小概率掉落。
 
 **English:** Withered clovers can also be crafted from **4 leaf litter** (shapeless), in addition to the small drop chance from breaking leaf litter.
+
+
+## 1.7.2 惩罚加重
+
+枯叶草的比例调整为 80% 倒霉 / 16% 小赚 / 4% 血赚，倒霉手段从 3 种扩到 5 种：扣血（至少留 1 心）、60~120 秒负面 buff（含凋零/中毒）、掉一件背包物品到地上、**清空经验**、**随机装备损耗 25~50% 耐久**。零代价白嫖高级奖励的问题已修正。
+
+**English:** Odds rebalanced to 80% bad / 16% small win / 4% jackpot. Bad outcomes now also include XP wipe and gear durability loss, so high-tier prizes are no longer free.

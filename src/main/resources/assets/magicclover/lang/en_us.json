@@ -114,11 +114,13 @@
   "jei.magicclover.clover_loot.stack": "Low-value items drop in stacks (2-16)",
   "item.magicclover.withered_clover": "Withered Clover",
   "tooltip.magicclover.withered.desc": "§8§lA gamble: mostly bad luck, sometimes a jackpot",
-  "tooltip.magicclover.withered.detail": "§7Found in leaf litter. Punishments have a floor",
+  "tooltip.magicclover.withered.detail": "§7Leaf litter drop or 4-litter craft · penalties include damage/debuffs/item drop/XP wipe/gear wear",
   "msg.magicclover.withered.jackpot": "§6§l[Withered Clover] §e§lJACKPOT! §fGot %s",
   "msg.magicclover.withered.small": "§a[Withered Clover] §fSmall win: %s x%s",
   "msg.magicclover.withered.bad.damage": "§c[Withered Clover] §fBad luck: lost %s hearts (never below 1)",
   "msg.magicclover.withered.bad.effect": "§c[Withered Clover] §fBad luck: %s §7for %s seconds",
   "msg.magicclover.withered.bad.drop": "§c[Withered Clover] §fBad luck: dropped %s §7(on the ground, not destroyed)",
-  "msg.magicclover.withered.bad.nothing": "§c[Withered Clover] §fBad luck: nothing fell out... lucky you"
+  "msg.magicclover.withered.bad.nothing": "§c[Withered Clover] §fBad luck: nothing fell out... lucky you",
+  "msg.magicclover.withered.bad.xp": "§c[Withered Clover] §fBad luck: XP wiped (§7lost %s levels + %s%% progress§f)",
+  "msg.magicclover.withered.bad.gear": "§c[Withered Clover] §fBad luck: %s §clost %s durability"
 }

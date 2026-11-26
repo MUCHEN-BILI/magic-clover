@@ -32,7 +32,8 @@ import java.util.function.Consumer;
  */
 public class WitheredCloverItem extends Item {
 	private static final List<Holder<MobEffect>> BAD_EFFECTS = List.of(
-			MobEffects.WEAKNESS, MobEffects.SLOWNESS, MobEffects.HUNGER, MobEffects.BLINDNESS);
+			MobEffects.WEAKNESS, MobEffects.SLOWNESS, MobEffects.HUNGER, MobEffects.BLINDNESS,
+			MobEffects.WITHER, MobEffects.POISON);
 
 	private static final Item[] SMALL_LOOT = {
 			Items.COAL, Items.RAW_IRON, Items.BREAD, Items.APPLE, Items.LEATHER,
@@ -95,17 +96,19 @@ public class WitheredCloverItem extends Item {
 
 	/** 倒霉：三种惩罚里随机一个，都留后路。 */
 	private void badLuck(ServerLevel level, Player player, InteractionHand hand) {
-		switch ((int) (Math.random() * 3)) {
+		switch ((int) (Math.random() * 5)) {
 			case 0 -> hurtButKeepOneHeart(player);
 			case 1 -> applyBadEffect(player);
-			default -> dropRandomItem(level, player);
+			case 2 -> dropRandomItem(level, player);
+			case 3 -> loseExperience(player);
+			default -> damageRandomGear(player);
 		}
 		Fx.burst(level, player, ParticleTypes.SMOKE, 18);
 	}
 
 	/** 扣 1~3 颗心，但至少留 1 心——绝不直接杀死玩家。 */
 	private void hurtButKeepOneHeart(Player player) {
-		float hearts = 1.0f + (float) Math.random() * 3.0f; // 1~4 = 2~8 点伤害
+		float hearts = 2.0f + (float) Math.random() * 3.0f; // 2~5 = 4~10 点伤害
 		float damage = Math.min(hearts * 2.0f, Math.max(0.0f, player.getHealth() - 1.0f));
 		if (damage > 0.0f) {
 			player.hurt(player.damageSources().generic(), damage);
@@ -117,7 +120,7 @@ public class WitheredCloverItem extends Item {
 	/** 30~60 秒的一级负面 buff。 */
 	private void applyBadEffect(Player player) {
 		Holder<MobEffect> effect = BAD_EFFECTS.get((int) (Math.random() * BAD_EFFECTS.size()));
-		int seconds = 30 + (int) (Math.random() * 31);
+		int seconds = 60 + (int) (Math.random() * 61);
 		player.addEffect(new MobEffectInstance(effect, seconds * 20, 0));
 		Msg.send(player, Component.translatable("msg.magicclover.withered.bad.effect",
 				Component.translatable(effect.value().getDescriptionId()), seconds));
@@ -136,6 +139,47 @@ public class WitheredCloverItem extends Item {
 		Fx.dropItem(level, player.getX(), player.getY() + 0.5, player.getZ(), stack, 20);
 		Msg.send(player, Component.translatable("msg.magicclover.withered.bad.drop",
 				stack.getDisplayName()));
+	}
+
+	/** 清空经验——前期升级慢，这是实打实的代价；不会动物品栏。 */
+	private void loseExperience(Player player) {
+		int levels = player.experienceLevel;
+		float points = player.experienceProgress;
+		player.experienceLevel = 0;
+		player.totalExperience = 0;
+		player.experienceProgress = 0.0f;
+		Msg.send(player, Component.translatable("msg.magicclover.withered.bad.xp", levels,
+				Math.round(points * 100)));
+	}
+
+	/**
+	 * 随机一件装备掉 25%~50% 耐久——不销毁，装备党也能接受。
+	 * 只处理有耐久的物品，消耗品走另一个分支。
+	 */
+	private void damageRandomGear(Player player) {
+		var inventory = player.getInventory();
+		java.util.List<Integer> candidates = new java.util.ArrayList<>();
+		for (int i = 0; i < inventory.getContainerSize(); i++) {
+			ItemStack stack = inventory.getItem(i);
+			if (!stack.isEmpty() && stack.isDamageableItem() && stack.getItem() != this) {
+				candidates.add(i);
+			}
+		}
+		if (candidates.isEmpty()) {
+			Msg.send(player, Component.translatable("msg.magicclover.withered.bad.nothing"));
+			return;
+		}
+		int slot = candidates.get((int) (Math.random() * candidates.size()));
+		ItemStack stack = inventory.getItem(slot);
+		int amount = Math.max(1, stack.getMaxDamage() / (2 + (int) (Math.random() * 2)));
+		int damage = Math.min(stack.getMaxDamage() - stack.getDamageValue(), amount);
+		if (damage > 0) {
+			stack.setDamageValue(stack.getDamageValue() + damage);
+			Msg.send(player, Component.translatable("msg.magicclover.withered.bad.gear",
+					stack.getDisplayName(), damage));
+		} else {
+			Msg.send(player, Component.translatable("msg.magicclover.withered.bad.nothing"));
+		}
 	}
 
 	private void stackConsume(Player player, InteractionHand hand) {
